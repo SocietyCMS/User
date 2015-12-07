@@ -1,12 +1,13 @@
-<?php namespace Modules\User\Entities\Sentinel;
+<?php
+
+namespace Modules\User\Entities\Sentinel;
 
 use Cartalyst\Sentinel\Throttling\EloquentThrottle as SentinelThrottle;
 
 class EloquentThrottle extends SentinelThrottle
 {
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $table = 'user__throttle';
 }

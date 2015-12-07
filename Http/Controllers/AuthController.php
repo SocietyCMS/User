@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Controllers;
+<?php
+
+namespace Modules\User\Http\Controllers;
 
 use Laracasts\Flash\Flash;
 use Modules\Core\Http\Controllers\PublicBaseController;
@@ -11,7 +13,6 @@ use Modules\User\Http\Requests\ResetRequest;
 
 class AuthController extends PublicBaseController
 {
-
     public function getLogin()
     {
         return view('user::public.login');
@@ -20,7 +21,7 @@ class AuthController extends PublicBaseController
     public function postLogin(LoginRequest $request)
     {
         $credentials = [
-            'email' => $request->email,
+            'email'    => $request->email,
             'password' => $request->password,
         ];
         $remember = (bool) $request->get('remember_me', false);

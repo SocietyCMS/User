@@ -1,14 +1,13 @@
-<?php namespace Modules\User\Entities\Sentinel;
+<?php
 
-
+namespace Modules\User\Entities\Sentinel;
 
 use Cartalyst\Sentinel\Reminders\EloquentReminder as SentinelReminder;
 
 class EloquentReminder extends SentinelReminder
 {
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $table = 'user__reminders';
 }

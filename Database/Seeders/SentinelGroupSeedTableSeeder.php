@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Database\Seeders;
+<?php
+
+namespace Modules\User\Database\Seeders;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Eloquent\Model;
@@ -14,8 +16,6 @@ class SentinelGroupSeedTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-
 
         $groups = Sentinel::getRoleRepository();
 
@@ -40,56 +40,56 @@ class SentinelGroupSeedTableSeeder extends Seeder
         $group->permissions = [
             'dashboard.dashboard.index' => true,
             /* Workbench */
-            'workshop.modules.index' => true,
-            'workshop.modules.show' => true,
+            'workshop.modules.index'   => true,
+            'workshop.modules.show'    => true,
             'workshop.modules.disable' => true,
-            'workshop.modules.enable' => true,
+            'workshop.modules.enable'  => true,
             /* Roles */
-            'user.roles.index' => true,
-            'user.roles.create' => true,
-            'user.roles.store' => true,
-            'user.roles.edit' => true,
-            'user.roles.update' => true,
+            'user.roles.index'   => true,
+            'user.roles.create'  => true,
+            'user.roles.store'   => true,
+            'user.roles.edit'    => true,
+            'user.roles.update'  => true,
             'user.roles.destroy' => true,
             /* Users */
-            'user.users.index' => true,
-            'user.users.create' => true,
-            'user.users.store' => true,
-            'user.users.edit' => true,
-            'user.users.update' => true,
+            'user.users.index'   => true,
+            'user.users.create'  => true,
+            'user.users.store'   => true,
+            'user.users.edit'    => true,
+            'user.users.update'  => true,
             'user.users.destroy' => true,
             /* Menu */
-            'menu.menus.index' => true,
-            'menu.menus.create' => true,
-            'menu.menus.store' => true,
-            'menu.menus.edit' => true,
-            'menu.menus.update' => true,
-            'menu.menus.destroy' => true,
-            'menu.menuitem.index' => true,
-            'menu.menuitem.create' => true,
-            'menu.menuitem.store' => true,
-            'menu.menuitem.edit' => true,
-            'menu.menuitem.update' => true,
+            'menu.menus.index'      => true,
+            'menu.menus.create'     => true,
+            'menu.menus.store'      => true,
+            'menu.menus.edit'       => true,
+            'menu.menus.update'     => true,
+            'menu.menus.destroy'    => true,
+            'menu.menuitem.index'   => true,
+            'menu.menuitem.create'  => true,
+            'menu.menuitem.store'   => true,
+            'menu.menuitem.edit'    => true,
+            'menu.menuitem.update'  => true,
             'menu.menuitem.destroy' => true,
             /* Media */
-            'media.media.index' => true,
-            'media.media.create' => true,
-            'media.media.store' => true,
-            'media.media.edit' => true,
-            'media.media.update' => true,
-            'media.media.destroy' => true,
-            'media.media-grid.index' => true,
+            'media.media.index'        => true,
+            'media.media.create'       => true,
+            'media.media.store'        => true,
+            'media.media.edit'         => true,
+            'media.media.update'       => true,
+            'media.media.destroy'      => true,
+            'media.media-grid.index'   => true,
             'media.media-grid.ckIndex' => true,
             /* Settings */
-            'setting.settings.index' => true,
-            'setting.settings.store' => true,
+            'setting.settings.index'             => true,
+            'setting.settings.store'             => true,
             'setting.settings.getModuleSettings' => true,
             /* Page */
-            'page.pages.index' => true,
-            'page.pages.create' => true,
-            'page.pages.store' => true,
-            'page.pages.edit' => true,
-            'page.pages.update' => true,
+            'page.pages.index'   => true,
+            'page.pages.create'  => true,
+            'page.pages.store'   => true,
+            'page.pages.edit'    => true,
+            'page.pages.update'  => true,
             'page.pages.destroy' => true,
         ];
         $group->save();

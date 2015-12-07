@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Requests;
+<?php
+
+namespace Modules\User\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,7 +14,7 @@ class ResetCompleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|min:3|confirmed',
+            'password'              => 'required|min:3|confirmed',
             'password_confirmation' => 'required',
         ];
     }

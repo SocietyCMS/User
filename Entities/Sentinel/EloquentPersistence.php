@@ -1,14 +1,14 @@
-<?php namespace Modules\User\Entities\Sentinel;
+<?php
 
+namespace Modules\User\Entities\Sentinel;
 
 use Cartalyst\Sentinel\Persistences\EloquentPersistence as SentinelPersistence;
 use Cartalyst\Sentinel\Persistences\PersistenceInterface;
 
 class EloquentPersistence extends SentinelPersistence implements PersistenceInterface
 {
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $table = 'user__persistences';
 

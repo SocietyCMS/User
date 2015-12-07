@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Presenters;
+<?php
+
+namespace Modules\User\Presenters;
 
 use Carbon\Carbon;
 use Laracasts\Presenter\Presenter;
@@ -6,11 +8,12 @@ use Laracasts\Presenter\Presenter;
 class UserPresenter extends Presenter
 {
     /**
-     * Return the gravatar link for the users email
-     * @param  int $size
+     * Return the gravatar link for the users email.
+     *
+     * @param int $size
+     *
      * @return string
      */
-
     public function gravatar($size = 90)
     {
         $email = md5($this->email);
@@ -23,7 +26,7 @@ class UserPresenter extends Presenter
      */
     public function fullname()
     {
-        return $this->name ?: $this->first_name . ' ' . $this->last_name;
+        return $this->name ?: $this->first_name.' '.$this->last_name;
     }
 
     public function createdAt()
@@ -49,5 +52,4 @@ class UserPresenter extends Presenter
                 ->diffForHumans();
         }
     }
-
 }

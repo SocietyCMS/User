@@ -1,41 +1,51 @@
-<?php namespace Modules\User\Repositories;
+<?php
+
+namespace Modules\User\Repositories;
 
 /**
- * Interface UserRepository
- * @package Modules\User\Repositories
+ * Interface UserRepository.
  */
 interface ActivityRepository
 {
     /**
-     * Returns all the activities
+     * Returns all the activities.
+     *
      * @return object
      */
     public function all();
 
     /**
-     * Create a activity resource
-     * @param  array $data
+     * Create a activity resource.
+     *
+     * @param array $data
+     *
      * @return mixed
      */
     public function create(array $data);
 
     /**
-     * Deletes a activity
+     * Deletes a activity.
+     *
      * @param $id
+     *
      * @return mixed
      */
     public function delete($id);
 
     /**
-     * Get lastest activities
-     * @param  array $credentials
+     * Get lastest activities.
+     *
+     * @param array $credentials
+     *
      * @return mixed
      */
     public function latest();
 
     /**
-     * Get lastest activities grouped by date
-     * @param  array $credentials
+     * Get lastest activities grouped by date.
+     *
+     * @param array $credentials
+     *
      * @return mixed
      */
     public function latestGrouped();

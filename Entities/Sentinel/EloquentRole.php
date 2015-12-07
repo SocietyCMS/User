@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Entities\Sentinel;
+<?php
+
+namespace Modules\User\Entities\Sentinel;
 
 use Cartalyst\Sentinel\Roles\EloquentRole as SentinelRole;
 use Cartalyst\Sentinel\Roles\RoleInterface;
@@ -9,12 +11,12 @@ class EloquentRole extends SentinelRole implements RoleInterface
     use PresentableTrait;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $table = 'user__roles';
 
     /**
-     * Presenter Class
+     * Presenter Class.
      *
      * @var string
      */

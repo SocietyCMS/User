@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Services;
+<?php
+
+namespace Modules\User\Services;
 
 use Modules\Core\Contracts\Authentication;
 use Modules\User\Repositories\RoleRepository;
@@ -26,6 +28,7 @@ class UserRegistration
 
     /**
      * @param array $input
+     *
      * @return mixed
      */
     public function register(array $input)
@@ -47,11 +50,12 @@ class UserRegistration
 
     private function createUser()
     {
-        return $this->auth->register((array)$this->input);
+        return $this->auth->register((array) $this->input);
     }
 
     /**
-     * Check if the request input has a profile key
+     * Check if the request input has a profile key.
+     *
      * @return bool
      */
     private function hasProfileData()
@@ -60,7 +64,8 @@ class UserRegistration
     }
 
     /**
-     * Create a profile for the given user
+     * Create a profile for the given user.
+     *
      * @param $user
      */
     private function createProfileForUser($user)
