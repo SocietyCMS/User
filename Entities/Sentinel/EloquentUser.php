@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Entities\Sentinel;
+<?php
+
+namespace Modules\User\Entities\Sentinel;
 
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Users\EloquentUser as SentinelUser;
@@ -7,21 +9,19 @@ use Laracasts\Presenter\PresentableTrait;
 use Modules\User\Entities\UserInterface;
 
 /**
- * Class EloquentUser
- * @package Modules\User\Entities\Sentinel
+ * Class EloquentUser.
  */
 class EloquentUser extends SentinelUser implements UserInterface
 {
-
     use PresentableTrait;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $table = 'user__users';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $persistableRelationship = 'user__persistences';
 
@@ -61,14 +61,14 @@ class EloquentUser extends SentinelUser implements UserInterface
     protected static $throttlingModel = 'Modules\User\Entities\EloquentThrottle';
 
     /**
-     * Presenter Class
+     * Presenter Class.
      *
      * @var string
      */
     protected $presenter = 'Modules\User\Presenters\UserPresenter';
 
     /**
-     * The fillable properties of the model
+     * The fillable properties of the model.
      *
      * @var array
      */
@@ -80,17 +80,17 @@ class EloquentUser extends SentinelUser implements UserInterface
     ];
 
     /**
-     * The hidden properties of the model
+     * The hidden properties of the model.
      *
      * @var array
      */
     protected $hidden = [
         'password',
-        'permissions'
+        'permissions',
     ];
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $loginNames = ['email'];
 
@@ -104,9 +104,9 @@ class EloquentUser extends SentinelUser implements UserInterface
         return $this->belongsToMany(static::$rolesModel, 'user__role_users', 'user_id', 'role_id')->withTimestamps();
     }
 
-
     /**
      * EloquentUser constructor.
+     *
      * @param array $attributes
      */
     public function __construct(array $attributes = [])
@@ -117,8 +117,10 @@ class EloquentUser extends SentinelUser implements UserInterface
     }
 
     /**
-     * Checks if a user belongs to the given Role ID
-     * @param  int $roleId
+     * Checks if a user belongs to the given Role ID.
+     *
+     * @param int $roleId
+     *
      * @return bool
      */
     public function hasRoleId($roleId)
@@ -127,8 +129,10 @@ class EloquentUser extends SentinelUser implements UserInterface
     }
 
     /**
-     * Checks if a user belongs to the given Role Name
-     * @param  string $name
+     * Checks if a user belongs to the given Role Name.
+     *
+     * @param string $name
+     *
      * @return bool
      */
     public function hasRoleName($name)
@@ -144,9 +148,9 @@ class EloquentUser extends SentinelUser implements UserInterface
         return $this->hasMany('Modules\User\Entities\Eloquent\EloquentActivity');
     }
 
-
     /**
-     * Check if the current user is activated
+     * Check if the current user is activated.
+     *
      * @return bool
      */
     public function isActivated()
@@ -160,7 +164,8 @@ class EloquentUser extends SentinelUser implements UserInterface
 
     /**
      * @param string $method
-     * @param array $parameters
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)

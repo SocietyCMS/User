@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Controllers\backend;
+<?php
+
+namespace Modules\User\Http\Controllers\backend;
 
 use Modules\Core\Permissions\PermissionManager;
 use Modules\User\Http\Requests\RolesRequest;
@@ -44,7 +46,8 @@ class RolesController extends BaseUserModuleController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  RolesRequest $request
+     * @param RolesRequest $request
+     *
      * @return Response
      */
     public function store(RolesRequest $request)
@@ -60,7 +63,8 @@ class RolesController extends BaseUserModuleController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int      $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -77,8 +81,9 @@ class RolesController extends BaseUserModuleController
     /**
      * Update the specified resource in storage.
      *
-     * @param  int          $id
-     * @param  RolesRequest $request
+     * @param int          $id
+     * @param RolesRequest $request
+     *
      * @return Response
      */
     public function update($id, RolesRequest $request)
@@ -95,7 +100,8 @@ class RolesController extends BaseUserModuleController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int      $id
+     * @param int $id
+     *
      * @return Response
      */
     public function destroy($id)

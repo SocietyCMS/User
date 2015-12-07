@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Composers;
+<?php
+
+namespace Modules\User\Composers;
 
 use Modules\Core\Permissions\PermissionManager;
 

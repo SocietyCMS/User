@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Repositories\Sentinel;
+<?php
+
+namespace Modules\User\Repositories\Sentinel;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Cartalyst\Sentinel\Users\UserInterface;
@@ -8,24 +10,28 @@ use Tymon\JWTAuth\Providers\Auth\AuthInterface;
 class SentinelAuthAdapter implements AuthInterface
 {
     /**
-     * Check a user's credentials
+     * Check a user's credentials.
      *
-     * @param  array  $credentials
+     * @param array $credentials
+     *
      * @return bool
      */
     public function byCredentials(array $credentials = [])
     {
         try {
             $user = Sentinel::authenticate($credentials);
+
             return $user instanceof UserInterface;
         } catch (Exception $e) {
             return false;
         }
     }
+
     /**
-     * Authenticate a user via the id
+     * Authenticate a user via the id.
      *
-     * @param  mixed  $id
+     * @param mixed $id
+     *
      * @return bool
      */
     public function byId($id)
@@ -33,13 +39,15 @@ class SentinelAuthAdapter implements AuthInterface
         try {
             $user = Sentinel::findById($id);
             Sentinel::login($user);
+
             return $user instanceof UserInterface && Sentinel::check();
         } catch (Exception $e) {
             return false;
         }
     }
+
     /**
-     * Get the currently authenticated user
+     * Get the currently authenticated user.
      *
      * @return mixed
      */

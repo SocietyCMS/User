@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Database\Seeders;
+<?php
+
+namespace Modules\User\Database\Seeders;
 
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -19,10 +21,10 @@ class SentinelUserSeedTableSeeder extends Seeder
         // Create an admin user
         $user = Sentinel::create(
             [
-                'email' => 'admin@societycms.com',
-                'password' => 'test',
+                'email'      => 'admin@societycms.com',
+                'password'   => 'test',
                 'first_name' => 'Ralph',
-                'last_name' => 'Huwiler',
+                'last_name'  => 'Huwiler',
             ]
         );
         // Activate the admin directly

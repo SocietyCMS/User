@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Middleware;
+<?php
+
+namespace Modules\User\Http\Middleware;
 
 use Illuminate\Support\Facades\Redirect;
 use Modules\Core\Contracts\Authentication;
@@ -18,8 +20,9 @@ class GuestMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, \Closure $next)

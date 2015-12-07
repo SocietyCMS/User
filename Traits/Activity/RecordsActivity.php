@@ -1,28 +1,25 @@
-<?php namespace Modules\User\Traits\Activity;
+<?php
+
+namespace Modules\User\Traits\Activity;
 
 use Modules\User\Entities\Eloquent\EloquentActivity as Activity;
 
 /**
- * Class RecordsActivity
- * @package Modules\User\Traits\Activity
+ * Class RecordsActivity.
  */
 trait RecordsActivity
 {
-
     /**
-     * Boot the trait
+     * Boot the trait.
      */
     protected static function bootRecordsActivity()
     {
-        foreach (static::getModelEvents() as $event)
-        {
-            static::$event(function($model) use ($event) {
+        foreach (static::getModelEvents() as $event) {
+            static::$event(function ($model) use ($event) {
                 $model->recordActivity($event);
             });
         }
-
     }
-
 
     /**
      * @param $model
@@ -42,6 +39,7 @@ trait RecordsActivity
     /**
      * @param $model
      * @param $action
+     *
      * @return string
      */
     protected function getActivityName($model, $action)
@@ -56,24 +54,26 @@ trait RecordsActivity
      */
     protected function getTemplate()
     {
-        if(isset(static::$templatePath)){
+        if (isset(static::$templatePath)) {
             return static::$templatePath;
         }
+
         return '';
     }
 
     /**
-     * Default records activity created and updated
+     * Default records activity created and updated.
+     *
      * @return array
      */
     protected static function getModelEvents()
     {
-        if(isset(static::$recordEvents)){
+        if (isset(static::$recordEvents)) {
             return static::$recordEvents;
         }
+
         return [
-            'created', 'updated'
+            'created', 'updated',
         ];
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Presenters;
+<?php
+
+namespace Modules\User\Presenters;
 
 use Carbon\Carbon;
 use Laracasts\Presenter\Presenter;

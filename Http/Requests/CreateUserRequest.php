@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Requests;
+<?php
+
+namespace Modules\User\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -8,8 +10,8 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:user__users|email'
+            'last_name'  => 'required',
+            'email'      => 'required|unique:user__users|email',
         ];
     }
 

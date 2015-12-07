@@ -1,15 +1,16 @@
-<?php namespace Modules\User\Http\Controllers\api;
+<?php
 
-use Illuminate\Http\Request;
-use Modules\Core\Http\Controllers\ApiBaseController;
+namespace Modules\User\Http\Controllers\api;
+
 use Modules\Core\Contracts\Authentication;
+use Modules\Core\Http\Controllers\ApiBaseController;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
 
-class UserController extends ApiBaseController {
-
+class UserController extends ApiBaseController
+{
     /**
      * @var UserRepository
      */
@@ -24,9 +25,9 @@ class UserController extends ApiBaseController {
     private $auth;
 
     /**
-     * @param UserRepository    $user
-     * @param RoleRepository    $role
-     * @param Authentication    $auth
+     * @param UserRepository $user
+     * @param RoleRepository $role
+     * @param Authentication $auth
      */
     public function __construct(
         UserRepository $user,
@@ -42,7 +43,8 @@ class UserController extends ApiBaseController {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateUserRequest $request
+     * @param CreateUserRequest $request
+     *
      * @return Response
      */
     public function store(CreateUserRequest $request)
@@ -56,8 +58,9 @@ class UserController extends ApiBaseController {
     /**
      * Update the specified resource in storage.
      *
-     * @param  int               $id
-     * @param  UpdateUserRequest $request
+     * @param int               $id
+     * @param UpdateUserRequest $request
+     *
      * @return Response
      */
     public function update($id, UpdateUserRequest $request)
@@ -70,13 +73,14 @@ class UserController extends ApiBaseController {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int      $id
+     * @param int $id
+     *
      * @return Response
      */
     public function destroy($id)
     {
         $this->user->delete($id);
+
         return $this->successDeleted();
     }
-
 }
