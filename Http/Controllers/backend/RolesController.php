@@ -53,9 +53,10 @@ class RolesController extends BaseUserModuleController
     public function store(RolesRequest $request)
     {
         $data = $this->mergeRequestWithPermissions($request);
-        $this->role->create($data);
 
-        flash(trans('user::messages.role created'));
+        if($this->role->create($data)) {
+            flash(trans('user::messages.role created'));
+        }
 
         return redirect()->route('backend::user.role.index');
     }

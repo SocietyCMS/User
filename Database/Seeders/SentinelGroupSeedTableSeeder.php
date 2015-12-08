@@ -27,7 +27,7 @@ class SentinelGroupSeedTableSeeder extends Seeder
             ]
         );
 
-        // Create an Users group
+        // Create a Users group
         $groups->createModel()->create(
             [
                 'name' => 'User',

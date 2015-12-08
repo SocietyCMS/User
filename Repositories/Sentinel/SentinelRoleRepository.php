@@ -3,6 +3,7 @@
 namespace Modules\User\Repositories\Sentinel;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Str;
 use Modules\User\Events\RoleWasUpdated;
 use Modules\User\Repositories\RoleRepository;
 
@@ -35,6 +36,14 @@ class SentinelRoleRepository implements RoleRepository
      */
     public function create($data)
     {
+        if(!isset($data['slug'])) {
+            $data['slug'] = Str::slug($data['name']);
+        }
+
+        if($data['slug'] == 'admin') {
+            return false;
+        }
+
         $this->role->create($data);
     }
 
@@ -92,6 +101,7 @@ class SentinelRoleRepository implements RoleRepository
         if (is_null($users)) {
             $users = [];
         }
+
         $role->users()->sync($users);
 
         event(new RoleWasUpdated($role));

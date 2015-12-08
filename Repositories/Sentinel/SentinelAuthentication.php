@@ -126,8 +126,9 @@ class SentinelAuthentication implements Authentication
         return Reminder::complete($user, $code, $password);
     }
 
+
     /**
-     * Determines if the current user has access to given permission.
+     * Determines if the current user .
      *
      * @param $permission
      *
@@ -139,7 +140,26 @@ class SentinelAuthentication implements Authentication
             return false;
         }
 
+        if (Sentinel::inRole('admin')) {
+            return true;
+        }
         return Sentinel::hasAccess($permission);
+    }
+
+    /**
+     * Determines if the current user is in the given Role.
+     *
+     * @param $role
+     *
+     * @return bool
+     */
+    public function inRole($role)
+    {
+        if (!Sentinel::check()) {
+            return false;
+        }
+
+        return Sentinel::inRole($role);
     }
 
     /**
