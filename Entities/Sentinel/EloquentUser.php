@@ -30,35 +30,35 @@ class EloquentUser extends SentinelUser implements UserInterface
      *
      * @var string
      */
-    protected static $rolesModel = 'Modules\User\Entities\EloquentRole';
+    protected static $rolesModel = 'Modules\User\Entities\Sentinel\EloquentRole';
 
     /**
      * The Eloquent persistences model name.
      *
      * @var string
      */
-    protected static $persistencesModel = 'Modules\User\Entities\EloquentPersistence';
+    protected static $persistencesModel = 'Modules\User\Entities\Sentinel\EloquentPersistence';
 
     /**
      * The Eloquent activations model name.
      *
      * @var string
      */
-    protected static $activationsModel = 'Modules\User\Entities\EloquentActivation';
+    protected static $activationsModel = 'Modules\User\Entities\Sentinel\EloquentActivation';
 
     /**
      * The Eloquent reminders model name.
      *
      * @var string
      */
-    protected static $remindersModel = 'Modules\User\Entities\EloquentReminder';
+    protected static $remindersModel = 'Modules\User\Entities\Sentinel\EloquentReminder';
 
     /**
      * The Eloquent throttling model name.
      *
      * @var string
      */
-    protected static $throttlingModel = 'Modules\User\Entities\EloquentThrottle';
+    protected static $throttlingModel = 'Modules\User\Entities\Sentinel\EloquentThrottle';
 
     /**
      * Presenter Class.

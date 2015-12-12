@@ -8,6 +8,7 @@ use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
+use Modules\User\Transformers\UserTransformer;
 
 class UserController extends ApiBaseController
 {
@@ -38,6 +39,17 @@ class UserController extends ApiBaseController
         $this->user = $user;
         $this->role = $role;
         $this->auth = $auth;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $users = $this->user->all();
+        return $this->response->collection($users, new UserTransformer());
     }
 
     /**
