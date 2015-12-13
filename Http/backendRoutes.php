@@ -14,4 +14,8 @@ $router->group(['prefix' => '/user'], function () {
     get('roles/{roles}/edit', ['as' => 'backend::user.role.edit', 'uses' => 'RolesController@edit']);
     put('roles/{roles}/edit', ['as' => 'backend::user.role.update', 'uses' => 'RolesController@update']);
     delete('roles/{roles}', ['as' => 'backend::user.role.destroy', 'uses' => 'RolesController@destroy']);
+
+    get('profile/', ['as' => 'backend::user.profile.show', 'uses' => 'ProfileController@currentUser']);
+    get('profile/{id}/edit', ['as' => 'backend::user.profile.edit', 'uses' => 'ProfileController@edit']);
+    put('profile/{id}/edit', ['as' => 'backend::user.profile.update', 'uses' => 'ProfileController@update']);
 });

@@ -33,4 +33,13 @@ return [
             'user.roles.destroy',
         ],
     ],
+    'profile' => [
+        'index' => [
+            'user.profile.show',
+        ],
+        'edit' => [
+            'user.profile.edit',
+            'user.profile.update',
+        ],
+    ],
 ];

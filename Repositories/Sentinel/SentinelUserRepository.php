@@ -45,7 +45,9 @@ class SentinelUserRepository implements UserRepository
      */
     public function create(array $data)
     {
-        return $this->user->create((array) $data);
+        $user = $this->user->create((array) $data);
+        $user->profile()->create([]);
+        return $user;
     }
 
     /**

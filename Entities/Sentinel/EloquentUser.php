@@ -141,11 +141,23 @@ class EloquentUser extends SentinelUser implements UserInterface
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Returns the activity relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function activity()
     {
         return $this->hasMany('Modules\User\Entities\Eloquent\EloquentActivity');
+    }
+
+    /**
+     * Returns the profile relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne('Modules\User\Entities\Eloquent\EloquentUserProfile', 'user_id');
     }
 
     /**

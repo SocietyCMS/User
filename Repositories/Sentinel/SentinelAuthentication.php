@@ -146,6 +146,20 @@ class SentinelAuthentication implements Authentication
         return Sentinel::hasAccess($permission);
     }
 
+
+    /**
+     * validate user credentials
+     *
+     * @param $permission
+     *
+     * @return bool
+     */
+    public function validateCredentials($userId, array $credentials)
+    {
+        $user = Sentinel::findById($userId);
+        return Sentinel::validateCredentials($user, $credentials);
+    }
+
     /**
      * Determines if the current user is in the given Role.
      *
