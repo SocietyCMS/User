@@ -1,5 +1,9 @@
 <?php
 
 return [
-    'enable-profile' => 'Enable user profiles',
+    'enable-profile' => [
+        'title'       => 'Enable user profiles',
+        'description' => 'Users can edit own profile and change their password',
+    ],
+
 ];
