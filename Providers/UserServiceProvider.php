@@ -25,8 +25,9 @@ class UserServiceProvider extends ServiceProvider
      */
     protected $middleware = [
         'User' => [
-            'auth.guest' => 'GuestMiddleware',
-            'logged.in'  => 'LoggedInMiddleware',
+            'auth.guest'  => 'GuestMiddleware',
+            'logged.in'   => 'LoggedInMiddleware',
+            'userprofile' => 'UserProfileMiddleware',
         ],
     ];
 
@@ -39,7 +40,7 @@ class UserServiceProvider extends ServiceProvider
     {
         $this->registerMiddleware($this->app['router']);
 
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'user');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'user');
     }
 
     private function registerMiddleware($router)
@@ -106,7 +107,7 @@ class UserServiceProvider extends ServiceProvider
     {
         $viewPath = base_path('resources/views/modules/user');
 
-        $sourcePath = __DIR__.'/../Resources/views';
+        $sourcePath = __DIR__ . '/../Resources/views';
 
         $this->publishes([
             $sourcePath => $viewPath,
@@ -127,7 +128,7 @@ class UserServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'user');
         } else {
-            $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'user');
+            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'user');
         }
     }
 
@@ -149,10 +150,10 @@ class UserServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('user.php'),
+            __DIR__ . '/../Config/config.php' => config_path('user.php'),
         ]);
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'user'
+            __DIR__ . '/../Config/config.php', 'user'
         );
     }
 }

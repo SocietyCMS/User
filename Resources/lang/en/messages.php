@@ -22,6 +22,7 @@ return [
     'role updated'                               => 'Role successfully updated.',
     'role deleted'                               => 'Role successfully deleted.',
     /* Profile management */
+    'profile disabled'                           => 'User Profiles are disabled.',
     'profile updated'                            => 'Profile successfully updated.',
     'invalid old password'                       => 'Old password is not valid.',
 ];

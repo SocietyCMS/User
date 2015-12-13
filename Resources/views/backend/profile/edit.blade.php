@@ -48,7 +48,7 @@
                                         <button class="ui basic button" id="uploadImageButton">
                                             @lang('user::profile.profile.upload new profile picture')
                                         </button>
-                                        <div class="ui basic loading button" id="uploadInProgress"></div>
+                                        <div class="ui basic loading button" id="uploadInProgress">Loading</div>
                                         <p> @lang('core::messages.info.upload picture by drag and drop')</p>
 
                                     </div>

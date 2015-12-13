@@ -46,6 +46,7 @@ class ProfileController extends BaseUserModuleController
         $this->user = $user;
         $this->role = $role;
         $this->auth = $auth;
+        $this->middleware('userprofile');
     }
 
     /**
