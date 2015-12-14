@@ -16,7 +16,7 @@ class EditProfileRequest extends FormRequest
     public function authorize(Authentication $auth)
     {
         $userId = $this->route('id');
-        return $auth->check()->id == $userId;
+        return $auth->check()->id == $userId || $auth->inRole('admin');
     }
 
     public function messages()
