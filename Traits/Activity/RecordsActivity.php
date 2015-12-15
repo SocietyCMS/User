@@ -2,6 +2,7 @@
 
 namespace Modules\User\Traits\Activity;
 
+use Carbon\Carbon;
 use Modules\User\Entities\Eloquent\EloquentActivity as Activity;
 
 /**
@@ -27,13 +28,22 @@ trait RecordsActivity
      */
     public function recordActivity($event)
     {
-        Activity::create([
-            'subject_id'    => $this->id,
-            'subject_type'  => get_class($this),
-            'name'          => $this->getActivityName($this, $event),
-            'user_id'       => $this->user_id,
-            'template'      => $this->getTemplate(),
-        ]);
+        $mapping = [
+            'subject_id'   => $this->id,
+            'subject_type' => get_class($this),
+            'name'         => $this->getActivityName($this, $event),
+            'user_id'      => $this->user_id,
+            'template'     => $this->getTemplate(),
+        ];
+
+        $recentSimilar = Activity::where($mapping)
+            ->where('created_at', '>=', Carbon::now()->subMinutes(30))
+            ->count();
+
+        if ($recentSimilar == 0) {
+            Activity::create($mapping);
+        }
+
     }
 
     /**

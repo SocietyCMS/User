@@ -29,10 +29,7 @@ class ActivityRepository extends EloquentBaseRepository
     {
         $this->applyCriteria();
         $this->applyScope();
-        $model = $this->model->latest()->take($amount)->get()->groupBy(function ($date) {
-            return Carbon::parse($date->created_at)->formatLocalized('%d %b. %Y');
-
-        });
+        $model = $this->model->latest()->take($amount)->get();
         $this->resetModel();
 
         return $this->parserResult($model);
