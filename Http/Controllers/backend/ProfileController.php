@@ -3,11 +3,10 @@
 namespace Modules\User\Http\Controllers\backend;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\User\Http\Requests\EditProfileRequest;
-use Modules\User\Http\Requests\UpdateProfileRequest;
+use Modules\User\Http\Requests\UpdateProfilePasswordRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
@@ -69,46 +68,31 @@ class ProfileController extends BaseUserModuleController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the password of the given user.
      *
      * @param int               $id
      * @param UpdateUserRequest $request
      *
      * @return Response
      */
-    public function update(UpdateProfileRequest $request, $id)
+    public function updatePassword(UpdateProfilePasswordRequest $request, $id)
     {
 
         $user = $this->user->find($id);
 
-        if($request->has('password'))
+        $credentials = [
+            'email'    => $user->email,
+            'password' => $request->old_password,
+        ];
+
+        if(!$this->auth->validateCredentials($id, $credentials))
         {
+            Flash::error(trans('user::messages.invalid old password'));
 
-            $validator = Validator::make($request->all(), [
-                'old_password' => 'required',
-                'password'     => 'required|confirmed',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()
-                    ->withErrors($validator)
-                    ->withInput();
-            }
-
-            $credentials = [
-                'email'    => $user->email,
-                'password' => $request->old_password,
-            ];
-
-            if(!$this->auth->validateCredentials($id, $credentials))
-            {
-                Flash::error(trans('user::messages.invalid old password'));
-
-                return redirect()->back();
-            }
-
-            $this->user->update($user, ['password' => Hash::make($request->input('password'))]);
+            return redirect()->back();
         }
+
+        $this->user->update($user, ['password' => Hash::make($request->input('password'))]);
 
 
         $user->profile->update($request->all());
@@ -116,17 +100,5 @@ class ProfileController extends BaseUserModuleController
         flash(trans('user::messages.profile updated'));
 
         return redirect()->back();
-    }
-
-    /**
-     * @param UpdateProfileRequest $request
-     * @param                      $id
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    private function updatePassword(UpdateProfileRequest $request, $id)
-    {
-
-        return true;
-
     }
 }
