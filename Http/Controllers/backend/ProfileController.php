@@ -7,6 +7,7 @@ use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\User\Http\Requests\EditProfileRequest;
 use Modules\User\Http\Requests\UpdateProfilePasswordRequest;
+use Modules\User\Http\Requests\UpdateProfileUserRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
@@ -45,6 +46,7 @@ class ProfileController extends BaseUserModuleController
         $this->user = $user;
         $this->role = $role;
         $this->auth = $auth;
+
         $this->middleware('userprofile');
     }
 
@@ -65,6 +67,25 @@ class ProfileController extends BaseUserModuleController
     {
         $user = $this->user->find($id);
         return view('user::backend.profile.edit', compact('user'));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int               $id
+     * @param UpdateUserRequest $request
+     *
+     * @return Response
+     */
+    public function updateUser(UpdateProfileUserRequest $request, $id)
+    {
+        $user = $this->user->find($id);
+        $this->user->update($user, $request->all());
+
+        flash(trans('user::messages.profile updated'));
+
+        return redirect()->back();
     }
 
     /**
@@ -97,7 +118,7 @@ class ProfileController extends BaseUserModuleController
 
         $user->profile->update($request->all());
 
-        flash(trans('user::messages.profile updated'));
+        flash(trans('user::messages.password updated'));
 
         return redirect()->back();
     }

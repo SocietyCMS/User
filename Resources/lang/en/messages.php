@@ -24,5 +24,6 @@ return [
     /* Profile management */
     'profile disabled'                           => 'User Profiles are disabled.',
     'profile updated'                            => 'Profile successfully updated.',
+    'password updated'                            => 'Your password has been successfully updated.',
     'invalid old password'                       => 'Old password is not valid.',
 ];

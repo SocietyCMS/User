@@ -27,8 +27,9 @@
         </div>
         <div class="thirteen wide stretched column" id="profileContainer">
                 <div class="ui tab active" data-tab="profile">
-                    <form class="ui form" role="form" method="POST" action="">
+                    <form class="ui form" role="form" method="POST" action="{{route('backend::user.profile.update.user', ['id' => $user->id])}}">
                         <h5 class="ui top attached header">
+                            {{ method_field('PUT') }}
                             {!! csrf_field() !!}
                             <div class="content">
                                 {{ $user->present()->fullname }}

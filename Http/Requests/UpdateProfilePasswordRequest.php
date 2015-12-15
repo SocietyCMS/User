@@ -15,11 +15,9 @@ class UpdateProfilePasswordRequest extends FormRequest
         ];
     }
 
-    public function authorize(Authentication $auth)
+    public function authorize()
     {
-        $userId = $this->route('id');
-
-        return $auth->check()->id == $userId;
+        return true;
     }
 
     public function messages()

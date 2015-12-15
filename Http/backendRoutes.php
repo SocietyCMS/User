@@ -18,5 +18,8 @@ $router->group(['prefix' => '/user'], function () {
     get('profile/', ['as' => 'backend::user.profile.show', 'uses' => 'ProfileController@currentUser']);
     get('profile/{id}/edit', ['as' => 'backend::user.profile.edit', 'uses' => 'ProfileController@edit']);
 
-    put('profile/{id}/edit/password', ['as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
+    put('profile/{id}/edit/user',
+        ['as' => 'backend::user.profile.update.user', 'uses' => 'ProfileController@updateUser']);
+    put('profile/{id}/edit/password',
+        ['as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
 });

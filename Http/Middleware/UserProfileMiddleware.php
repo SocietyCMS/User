@@ -26,7 +26,8 @@ class UserProfileMiddleware
      */
     public function handle($request, \Closure $next)
     {
-        if(\Setting::getBool('user::enable-profile'))
+
+        if(\Setting::getBool('user::enable-profile') )
         {
             return $next($request);
         }
