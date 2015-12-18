@@ -27,6 +27,9 @@ class SentinelUserSeedTableSeeder extends Seeder
                 'last_name'  => 'Huwiler',
             ]
         );
+
+        $user->profile()->create([]);
+
         // Activate the admin directly
         $activation = Activation::create($user);
         Activation::complete($user, $activation->code);
