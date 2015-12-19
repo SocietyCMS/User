@@ -3,28 +3,67 @@
 namespace Modules\User\Http\Controllers;
 
 use Laracasts\Flash\Flash;
+use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\PublicBaseController;
+use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Exceptions\InvalidOrExpiredResetCode;
 use Modules\User\Exceptions\UserNotFoundException;
 use Modules\User\Http\Requests\LoginRequest;
 use Modules\User\Http\Requests\RegisterRequest;
 use Modules\User\Http\Requests\ResetCompleteRequest;
 use Modules\User\Http\Requests\ResetRequest;
+use Modules\User\Repositories\UserRepository;
 
+/**
+ * Class AuthController
+ * @package Modules\User\Http\Controllers
+ */
 class AuthController extends PublicBaseController
 {
+
+
+    /**
+     * @var UserRepository
+     */
+    private $user;
+    /**
+     * @var Authentication
+     */
+    private $auth;
+
+    /**
+     * @param UserRepository $user
+     * @param Authentication $auth
+     */
+    public function __construct(
+        UserRepository $user,
+        Authentication $auth
+    )
+    {
+        $this->user = $user;
+        $this->auth = $auth;
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getLogin()
     {
         return view('user::public.login');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function postLogin(LoginRequest $request)
     {
         $credentials = [
             'email'    => $request->email,
             'password' => $request->password,
         ];
-        $remember = (bool) $request->get('remember_me', false);
+        $remember = (bool)$request->get('remember_me', false);
 
         $error = $this->auth->login($credentials, $remember);
         if (!$error) {
@@ -38,20 +77,30 @@ class AuthController extends PublicBaseController
         return redirect()->back()->withInput();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getRegister()
     {
         return view('user::public.register');
     }
 
+    /**
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postRegister(RegisterRequest $request)
     {
         app('Modules\User\Services\UserRegistration')->register($request->all());
 
         Flash::success(trans('user::messages.account created check email for activation'));
 
-        return redirect()->route('register');
+        return redirect()->route('login');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getLogout()
     {
         $this->auth->logout();
@@ -59,6 +108,11 @@ class AuthController extends PublicBaseController
         return redirect()->route('login');
     }
 
+    /**
+     * @param $userId
+     * @param $code
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getActivate($userId, $code)
     {
         if ($this->auth->activate($userId, $code)) {
@@ -71,43 +125,68 @@ class AuthController extends PublicBaseController
         return redirect()->route('register');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getReset()
     {
         return view('user::public.reset.begin');
     }
 
+    /**
+     * @param ResetRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * @throws UserNotFoundException
+     */
     public function postReset(ResetRequest $request)
     {
-        try {
-            $this->dispatchFrom('Modules\User\Commands\BeginResetProcessCommand', $request);
-        } catch (UserNotFoundException $e) {
+
+        $user = $this->user->findByCredentials(['email' =>$request->email]);
+
+        if (!$user) {
             Flash::error(trans('user::messages.no user found'));
 
             return redirect()->back()->withInput();
         }
+
+        $code = $this->auth->createReminderCode($user);
+
+        event(new UserHasBegunResetProcess($user, $code));
 
         Flash::success(trans('user::messages.check email to reset password'));
 
         return redirect()->route('reset');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getResetComplete()
     {
         return view('user::public.reset.complete');
     }
 
+    /**
+     * @param                      $userId
+     * @param                      $code
+     * @param ResetCompleteRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function postResetComplete($userId, $code, ResetCompleteRequest $request)
     {
-        try {
-            $this->dispatchFromArray(
-                'Modules\User\Commands\CompleteResetProcessCommand',
-                array_merge($request->all(), ['userId' => $userId, 'code' => $code])
-            );
-        } catch (UserNotFoundException $e) {
+
+        $this->input = $request->all();
+
+        $user = $this->user->find($userId);
+
+        if (!$user) {
             Flash::error(trans('user::messages.user no longer exists'));
 
             return redirect()->back()->withInput();
-        } catch (InvalidOrExpiredResetCode $e) {
+        }
+
+
+        if (!$this->auth->completeResetPassword($user, $code, $request->password)) {
             Flash::error(trans('user::messages.invalid reset code'));
 
             return redirect()->back()->withInput();
@@ -116,5 +195,6 @@ class AuthController extends PublicBaseController
         Flash::success(trans('user::messages.password reset'));
 
         return redirect()->route('login');
+
     }
 }

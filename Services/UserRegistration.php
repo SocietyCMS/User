@@ -3,8 +3,13 @@
 namespace Modules\User\Services;
 
 use Modules\Core\Contracts\Authentication;
+use Modules\User\Events\UserHasRegistered;
 use Modules\User\Repositories\RoleRepository;
 
+/**
+ * Class UserRegistration
+ * @package Modules\User\Services
+ */
 class UserRegistration
 {
     /**
@@ -20,6 +25,11 @@ class UserRegistration
      */
     private $input;
 
+    /**
+     * UserRegistration constructor.
+     * @param Authentication $auth
+     * @param RoleRepository $role
+     */
     public function __construct(Authentication $auth, RoleRepository $role)
     {
         $this->auth = $auth;
@@ -37,43 +47,25 @@ class UserRegistration
 
         $user = $this->createUser();
 
-        if ($this->hasProfileData()) {
-            $this->createProfileForUser($user);
-        }
-
         $this->assignUserToUsersGroup($user);
 
-        //event(new UserHasRegistered($user));
+        event(new UserHasRegistered($user));
 
         return $user;
     }
 
-    private function createUser()
-    {
-        return $this->auth->register((array) $this->input);
-    }
-
     /**
-     * Check if the request input has a profile key.
-     *
      * @return bool
      */
-    private function hasProfileData()
+    private function createUser()
     {
-        return isset($this->input['profile']);
+        return $this->auth->register((array)$this->input);
     }
+
 
     /**
-     * Create a profile for the given user.
-     *
      * @param $user
      */
-    private function createProfileForUser($user)
-    {
-        $profileData = array_merge($this->input['profile'], ['user_id' => $user->id]);
-        app('Modules\Profile\Repositories\ProfileRepository')->create($profileData);
-    }
-
     private function assignUserToUsersGroup($user)
     {
         $role = $this->role->findByName('User');

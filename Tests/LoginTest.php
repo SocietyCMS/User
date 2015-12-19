@@ -9,6 +9,7 @@ class LoginTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions;
 
+
     /**
      * A basic functional test example.
      *
@@ -25,6 +26,6 @@ class LoginTest extends TestCase
             ->press('Sign in')
 
             ->seePageIs('/backend')
-            ->see('SocietyCMS Admin Interface');
+            ->see('Welcome to SocietyCMS');
     }
 }
