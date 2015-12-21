@@ -82,6 +82,10 @@ class AuthController extends PublicBaseController
      */
     public function getRegister()
     {
+        if (!\Setting::get('user::enable-registration')) {
+            return redirect()->route('login');
+        }
+
         return view('user::public.register');
     }
 
@@ -91,6 +95,10 @@ class AuthController extends PublicBaseController
      */
     public function postRegister(RegisterRequest $request)
     {
+        if (!\Setting::get('user::enable-registration')) {
+            return redirect()->route('login');
+        }
+
         app('Modules\User\Services\UserRegistration')->register($request->all());
 
         Flash::success(trans('user::messages.account created check email for activation'));
