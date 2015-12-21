@@ -27,10 +27,10 @@
         @lang('core::elements.separator.or')
     </div>
     <div class="center aligned column">
-        <div class="ui big pink labeled icon pupup button" data-content="Coming soon" data-variation="inverted">
+        <a href="{{ route('backend::user.user.passwordReset', $user->id) }}" class="ui big pink labeled icon button">
             <i class="mail outline icon"></i>
             {{ trans('user::users.send reset password email') }}
-        </div>
+        </a>
     </div>
 
 </div>

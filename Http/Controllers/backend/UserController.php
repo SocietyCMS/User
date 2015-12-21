@@ -2,8 +2,11 @@
 
 namespace Modules\User\Http\Controllers\backend;
 
+use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
+use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Http\Requests\CreateUserRequest;
+use Modules\User\Http\Requests\ResetRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
@@ -113,6 +116,27 @@ class UserController extends BaseUserModuleController
         $this->user->updateAndSyncRoles($id, $request->all(), $request->roles);
 
         flash(trans('user::messages.user updated'));
+
+        return redirect()->route('backend::user.user.index');
+    }
+
+    /**
+     * @param ResetRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * @throws UserNotFoundException
+     */
+    public function passwordResetRequest($id)
+    {
+        if (!$user = $this->user->find($id)) {
+            flash()->error(trans('user::messages.user not found'));
+            return redirect()->route('backend::user.index');
+        }
+
+        $code = $this->auth->createReminderCode($user);
+
+        event(new UserHasBegunResetProcess($user, $code));
+
+        Flash::success(trans('user::messages.reset password email sent'));
 
         return redirect()->route('backend::user.user.index');
     }
