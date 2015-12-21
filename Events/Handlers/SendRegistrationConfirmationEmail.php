@@ -6,6 +6,7 @@ use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Mail;
 use Modules\Core\Contracts\Authentication;
 use Modules\User\Events\UserHasRegistered;
+use Setting;
 
 class SendRegistrationConfirmationEmail
 {
@@ -31,8 +32,9 @@ class SendRegistrationConfirmationEmail
         ];
 
         Mail::queue('user::emails.welcome', $data,
-            function (Message $m) use ($user) {
-                $m->to($user->email)->subject('Welcome.');
+            function (Message $message) use ($user) {
+                $message->from(Setting::get('core::mail-from'),Setting::get('core::site-name'));
+                $message->to($user->email)->subject('Welcome.');
             }
         );
     }

@@ -122,7 +122,7 @@ class AuthController extends PublicBaseController
         }
         Flash::error(trans('user::messages.there was an error with the activation'));
 
-        return redirect()->route('register');
+        return redirect()->route('login');
     }
 
     /**
