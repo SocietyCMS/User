@@ -29,7 +29,7 @@ class ActivityRepository extends EloquentBaseRepository
     {
         $this->applyCriteria();
         $this->applyScope();
-        $model = $this->model->latest()->take($amount)->get();
+        $model = $this->model->latest()->with('subject')->take($amount)->get();
         $this->resetModel();
 
         return $this->parserResult($model);
