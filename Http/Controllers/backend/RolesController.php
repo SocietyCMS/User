@@ -2,11 +2,12 @@
 
 namespace Modules\User\Http\Controllers\backend;
 
+use Modules\Core\Http\Controllers\AdminBaseController;
 use Modules\Core\Permissions\PermissionManager;
 use Modules\User\Http\Requests\RolesRequest;
 use Modules\User\Repositories\RoleRepository;
 
-class RolesController extends BaseUserModuleController
+class RolesController extends AdminBaseController
 {
     /**
      * @var RoleRepository

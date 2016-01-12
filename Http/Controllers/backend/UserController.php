@@ -4,6 +4,7 @@ namespace Modules\User\Http\Controllers\backend;
 
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
+use Modules\Core\Http\Controllers\AdminBaseController;
 use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\ResetRequest;
@@ -11,7 +12,7 @@ use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
 
-class UserController extends BaseUserModuleController
+class UserController extends AdminBaseController
 {
     /**
      * @var UserRepository
@@ -21,10 +22,6 @@ class UserController extends BaseUserModuleController
      * @var RoleRepository
      */
     private $role;
-    /**
-     * @var Authentication
-     */
-    private $auth;
 
     /**
      * @param UserRepository $user
@@ -33,13 +30,11 @@ class UserController extends BaseUserModuleController
      */
     public function __construct(
         UserRepository $user,
-        RoleRepository $role,
-        Authentication $auth
+        RoleRepository $role
     ) {
         parent::__construct();
         $this->user = $user;
         $this->role = $role;
-        $this->auth = $auth;
     }
 
     /**
