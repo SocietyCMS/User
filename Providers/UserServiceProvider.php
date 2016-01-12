@@ -81,7 +81,7 @@ class UserServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        $driver = config('society.user.config.driver', 'Sentinel');
+        $driver = config('society.user.config.driver', 'Entrust');
 
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
