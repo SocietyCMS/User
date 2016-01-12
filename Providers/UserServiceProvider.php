@@ -16,13 +16,6 @@ class UserServiceProvider extends ServiceProvider
     /**
      * @var array
      */
-    protected $providers = [
-        'Sentinel' => 'Cartalyst\\Sentinel\\Laravel\\SentinelServiceProvider',
-    ];
-
-    /**
-     * @var array
-     */
     protected $middleware = [
         'User' => [
             'auth.guest'  => 'GuestMiddleware',
@@ -61,40 +54,23 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(
-            $this->getUserPackageServiceProvider()
-        );
-
         $this->registerBindings();
-    }
-
-    private function getUserPackageServiceProvider()
-    {
-        $driver = config('society.user.config.driver', 'Sentinel');
-
-        if (!isset($this->providers[$driver])) {
-            throw new \Exception("Driver [{$driver}] does not exist");
-        }
-
-        return $this->providers[$driver];
     }
 
     private function registerBindings()
     {
-        $driver = config('society.user.config.driver', 'Entrust');
-
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
-            "Modules\\User\\Repositories\\{$driver}\\{$driver}UserRepository"
+            "Modules\\User\\Repositories\\Entrust\\EntrustUserRepository"
         );
 
         $this->app->bind(
             'Modules\User\Repositories\RoleRepository',
-            "Modules\\User\\Repositories\\{$driver}\\{$driver}RoleRepository"
+            "Modules\\User\\Repositories\\Entrust\\EntrustRoleRepository"
         );
         $this->app->bind(
             'Modules\Core\Contracts\Authentication',
-            "Modules\\User\\Repositories\\{$driver}\\{$driver}Authentication"
+            "Modules\\User\\Repositories\\Entrust\\EntrustAuthentication"
         );
     }
 

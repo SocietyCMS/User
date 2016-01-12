@@ -16,8 +16,5 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        $this->call('Modules\\User\\Database\\Seeders\\SentinelGroupSeedTableSeeder');
-        $this->call('Modules\\User\\Database\\Seeders\\SentinelUserSeedTableSeeder');
     }
 }

@@ -34,9 +34,7 @@ class EloquentActivity extends Model
      */
     public function user()
     {
-        $driver = config('society.user.config.driver', 'Sentinel');
-
-        return $this->belongsTo("Modules\\User\\Entities\\{$driver}\\EloquentUser", 'user_id');
+        return $this->belongsTo("Modules\\User\\Entities\\Entrust\\EloquentUser", 'user_id');
     }
 
     /**
