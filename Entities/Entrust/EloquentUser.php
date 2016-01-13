@@ -18,9 +18,9 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use CanResetPassword;
     use PresentableTrait;
 
-    use HasMediaTrait;
+    use HasMediaTrait{ delete as mediaDelete;}
 
-    use EntrustUserTrait { can as entrustCan;}
+    use EntrustUserTrait { can as entrustCan; delete as entrustDelete;}
 
     /**
      * The database table used by the model.
@@ -113,6 +113,19 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
             return true;
         }
         return $this->entrustCan($permission, $requireAll = false);
+    }
+
+    /**
+     * Delete the model. The extra logic isn't handled in a model event since the boot function is unreliable
+     * for currently unknown reasons.
+     *
+     * @return bool
+     */
+    public function delete()
+    {
+        $this->mediaDelete();
+        $this->entrustDelete();
+        return true;
     }
 
 }

@@ -20,7 +20,7 @@ class Role extends Seeder
 
         $admin = DB::table('user__roles')->insertGetId([
             'name' => 'admin',
-            'display_name' => 'User Administrator',
+            'display_name' => 'Site Administrator',
             'description' => 'User is allowed to manage the full site',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -28,7 +28,7 @@ class User extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
-        $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 5)->create();
+        $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create();
     }
 
 }

@@ -10,6 +10,7 @@
 |
 */
 $factory->define(\Modules\User\Entities\Entrust\EloquentUser::class, function (Faker\Generator $faker) {
+    $faker = \Faker\Factory::create('de_CH');
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
@@ -20,7 +21,7 @@ $factory->define(\Modules\User\Entities\Entrust\EloquentUser::class, function (F
         'street' => $faker->streetAddress,
         'city' => $faker->city,
         'zip' => $faker->postcode,
-        'country' => $faker->state,
+        'country' => $faker->country,
         'phone' => $faker->phoneNumber,
         'mobile' => $faker->phoneNumber,
         'password' => bcrypt(str_random(10)),

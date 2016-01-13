@@ -38,7 +38,7 @@
                                 <div class="ui horizontal divided list">
                                     @foreach($user->roles as $role)
                                         <span class="item">
-                                            {{$role->name}}
+                                            {{$role->display_name}}
                                         </span>
                                     @endforeach
 
