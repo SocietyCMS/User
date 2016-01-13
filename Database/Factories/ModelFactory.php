@@ -24,6 +24,7 @@ $factory->define(\Modules\User\Entities\Entrust\EloquentUser::class, function (F
         'country' => $faker->country,
         'phone' => $faker->phoneNumber,
         'mobile' => $faker->phoneNumber,
+        'last_login' => $faker->dateTimeThisYear,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];

@@ -1,5 +1,6 @@
 <?php namespace Modules\User\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Maatwebsite\Sidebar\Domain\Events\FlushesSidebarCache;
@@ -48,5 +49,11 @@ class EventServiceProvider extends ServiceProvider
             $permissionManager = new PermissionManager();
             $permissionManager->rollbackDefault($module);
         });
+
+        $events->listen('auth.login', function($user) {
+            $user->last_login = Carbon::now();
+            $user->save();
+        });
+
     }
 }
