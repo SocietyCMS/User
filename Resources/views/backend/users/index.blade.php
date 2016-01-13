@@ -29,7 +29,7 @@
                 <td>
 
                     <h4 class="ui image header">
-                        <img src="{{ $user->profile->present()->avatar }}" class="ui mini rounded image">
+                        <img src="{{ $user->present()->avatar }}" class="ui mini rounded image">
                         <div class="content">
                             <a href="{{ route('backend::user.user.edit', [$user->id]) }}" id="userFullname_{{$user->id}}">
                                 {{ $user->present()->fullname }}

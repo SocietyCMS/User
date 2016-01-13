@@ -12,7 +12,32 @@ class UserPresenter extends Presenter
      */
     public function fullname()
     {
-        return $this->name ?: $this->first_name.' '.$this->last_name;
+        return $this->name ?: $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function avatar()
+    {
+        return $this->smallAvatar();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function smallAvatar()
+    {
+
+        return $this->entity->getFirstMediaUrl('profile', 'square') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
+    }
+
+    /**
+     * @return mixed
+     */
+    public function largeAvatar()
+    {
+        return $this->entity->getFirstMediaUrl('profile', 'original250') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
     }
 
     public function createdAt()

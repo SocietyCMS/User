@@ -7,14 +7,18 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Laracasts\Presenter\PresentableTrait;
 
-class EloquentUser extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class EloquentUser extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasMediaConversions
 {
     use Authenticatable;
     use CanResetPassword;
     use PresentableTrait;
+
+    use HasMediaTrait;
 
     use EntrustUserTrait { can as entrustCan;}
 
@@ -29,7 +33,21 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'description',
+        'office',
+        'bio',
+        'street',
+        'city',
+        'zip',
+        'country',
+        'phone',
+        'mobile',
+        'password',
+    ];
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -54,29 +72,29 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         return $this->hasMany('Modules\User\Entities\Eloquent\EloquentActivity');
     }
 
-    /**
-     * Returns the profile relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasOne
-     */
-    public function profile()
-    {
-        return $this->hasOne('Modules\User\Entities\Eloquent\EloquentUserProfile', 'user_id');
-    }
 
     public function isActivated()
     {
         return true;
     }
 
-    public static function boot() {
+    public function registerMediaConversions()
+    {
+        $this->addMediaConversion('square')
+            ->setManipulations(['w' => 200, 'h' => 200, 'fit' => 'crop'])
+            ->performOnCollections('profile');
 
-        parent::boot();
+        $this->addMediaConversion('original180')
+            ->setManipulations(['w' => 180, 'h' => 180, 'fit' => 'max'])
+            ->performOnCollections('profile');
 
-        static::created(function($user)
-        {
-            $user->profile()->create([]);
-        });
+        $this->addMediaConversion('original250')
+            ->setManipulations(['w' => 250, 'h' => 250, 'fit' => 'max'])
+            ->performOnCollections('profile');
+
+        $this->addMediaConversion('original400')
+            ->setManipulations(['w' => 400, 'h' => 400, 'fit' => 'max'])
+            ->performOnCollections('profile');
 
     }
 

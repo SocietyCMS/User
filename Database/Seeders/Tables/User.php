@@ -18,25 +18,17 @@ class User extends Seeder
     public function run()
     {
         DB::table('user__users')->delete();
-        DB::table('user__userprofiles')->delete();
 
-        $adminUser = DB::table('user__users')->insertGetId([
-            'name' => 'admin',
+        $adminUser = DB::table('user__users')->insert([
+            'first_name' => 'SocietyCMS',
+            'last_name' => 'Administrator',
             'email' => 'admin@societycms.com',
             'password' => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
-        DB::table('user__userprofiles')->insert([
-            'user_id' => $adminUser,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
-        $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 5)->create()->each(function($user) {
-            //$u->posts()->save(factory(App\Post::class)->make());
-        });
+        $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 5)->create();
     }
 
 }

@@ -45,7 +45,6 @@ class UserController extends AdminBaseController
     public function index()
     {
         $users = $this->user->all();
-        $currentUser = $this->auth->check();
 
         return view('user::backend.users.index', compact('users', 'currentUser'));
     }
@@ -71,8 +70,7 @@ class UserController extends AdminBaseController
      */
     public function store(CreateUserRequest $request)
     {
-        $data = $this->mergeRequestWithPermissions($request);
-        $this->user->createWithRoles($data, $request->roles, $request->activated);
+        $this->user->createWithRoles($request->all(), $request->roles);
 
         flash(trans('user::messages.user created'));
 
@@ -108,7 +106,7 @@ class UserController extends AdminBaseController
      */
     public function update($id, UpdateUserRequest $request)
     {
-        $this->user->updateAndSyncRoles($id, $request->all(), $request->roles);
+        $this->user->updatewithRoles($request->all(),$request->roles, $id);
 
         flash(trans('user::messages.user updated'));
 

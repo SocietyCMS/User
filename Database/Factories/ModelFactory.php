@@ -11,8 +11,18 @@
 */
 $factory->define(\Modules\User\Entities\Entrust\EloquentUser::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->email,
+        'description' => $faker->sentence,
+        'office' => $faker->company,
+        'bio' => $faker->paragraph,
+        'street' => $faker->streetAddress,
+        'city' => $faker->city,
+        'zip' => $faker->postcode,
+        'country' => $faker->state,
+        'phone' => $faker->phoneNumber,
+        'mobile' => $faker->phoneNumber,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
