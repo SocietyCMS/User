@@ -31,10 +31,11 @@
                     <h4 class="ui header">
                         <div class="content">
                             <a href="{{route('backend::user.role.edit', $role->id)}}">
-                                {{ $role->name }}
+                                {{ $role->display_name }}
                             </a>
+
                             <div class="sub header">
-                                {{trans_choice('user::roles.table.members', $role->users()->count())}}
+                                {{ $role->description }} | {{trans_choice('user::roles.table.members', $role->users()->count())}}
                             </div>
                         </div>
                     </h4>

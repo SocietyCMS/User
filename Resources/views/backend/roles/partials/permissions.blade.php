@@ -14,7 +14,7 @@
                         <input type="checkbox"
                                id="{{ "$name.$subPermissionTitle.$permissionAction" }}"
                                name="permissions[{{ "$name.$subPermissionTitle.$permissionAction" }}]"
-                               @if(isset($model) && $model->hasAccess("$name.$subPermissionTitle.$permissionAction")) checked="checked" @endif
+                               @if(isset($model) && $model->hasPermission("$name.$subPermissionTitle.$permissionAction")) checked="checked" @endif
                                value="true" >
                         <label for="{{"$name.$subPermissionTitle.$permissionAction"}}">{{ ucfirst($permissionAction) }}</label>
                     </div>

@@ -14,8 +14,9 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
 {
     use Authenticatable;
     use CanResetPassword;
-    use EntrustUserTrait;
     use PresentableTrait;
+
+    use EntrustUserTrait { can as entrustCan;}
 
     /**
      * The database table used by the model.
@@ -67,4 +68,33 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     {
         return true;
     }
+
+    public static function boot() {
+
+        parent::boot();
+
+        static::created(function($user)
+        {
+            $user->profile()->create([]);
+        });
+
+    }
+
+    /**
+     * Check if user has a permission by its name.
+     * return rearly if the user is in the admin group.
+     *
+     * @param string|array $permission Permission string or array of permissions.
+     * @param bool         $requireAll All permissions in the array are required.
+     *
+     * @return bool
+     */
+    public function can($permission, $requireAll = false)
+    {
+        if($this->cachedRoles()->where('name', 'admin')){
+            return true;
+        }
+        return $this->entrustCan($permission, $requireAll = false);
+    }
+
 }
