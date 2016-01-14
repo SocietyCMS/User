@@ -109,7 +109,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function can($permission, $requireAll = false)
     {
-        if($this->cachedRoles()->where('name', 'admin')){
+        if($this->cachedRoles()->where('name', 'admin')->count()){
             return true;
         }
         return $this->entrustCan($permission, $requireAll = false);

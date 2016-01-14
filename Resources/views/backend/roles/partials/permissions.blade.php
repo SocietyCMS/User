@@ -23,10 +23,10 @@
                 <td>
                     <h4 class="ui left floated header">
                         <div class="content">
-                            {{$permission->display_name}}
+                            @lang($permission->display_name)
 
                             <div class="sub header">
-                                {{$permission->description}}
+                                @lang($permission->description)
                             </div>
                         </div>
                     </h4>

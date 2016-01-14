@@ -39,7 +39,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                 $item->icon('fa fa-user');
                 $item->route('backend::user.user.index');
                 $item->authorize(
-                    $this->auth->hasAccess('user.users.index')
+                    $this->auth->can('user::manage-user')
                 );
             });
 
@@ -48,7 +48,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                 $item->icon('fa fa-users');
                 $item->route('backend::user.role.index');
                 $item->authorize(
-                    $this->auth->hasAccess('user.roles.index')
+                    $this->auth->can('user::manage-role')
                 );
             });
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 
 class EloquentRole extends Model implements EntrustRoleInterface
 {
-    use EntrustRoleTrait;
+    use EntrustRoleTrait { hasPermission as entrustHasPermission;}
     use PresentableTrait;
 
     /**
@@ -46,5 +46,22 @@ class EloquentRole extends Model implements EntrustRoleInterface
     public function perms()
     {
         return $this->belongsToMany(Config::get('entrust.permission'), Config::get('entrust.permission_role_table'), Config::get('entrust.role_foreign_key'), Config::get('entrust.permission_foreign_key'));
+    }
+
+    /**
+     * Checks if the role has a permission by its name.
+     *
+     * @param string|array $name       Permission name or array of permission names.
+     * @param bool         $requireAll All permissions in the array are required.
+     *
+     * @return bool
+     */
+    public function hasPermission($name, $requireAll = false)
+    {
+        if($this->name == 'admin')
+        {
+            return true;
+        }
+        return $this->entrustHasPermission($name, $requireAll);
     }
 }
