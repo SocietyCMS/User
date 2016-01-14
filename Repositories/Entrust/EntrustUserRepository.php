@@ -19,12 +19,44 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     }
 
     /**
+     * Encrypt password before creating a new user instance.
+     *
+     * @param  array  $data
+     * @return EloquentUser
+     */
+    public function create(array $data)
+    {
+        if(array_key_exists('password',$data))
+        {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        return parent::create($data);
+    }
+
+    /**
+     * Encrypt password before updating a user instance.
+     *
+     * @param  array  $data
+     * @return EloquentUser
+     */
+    public function update(array $data, $id)
+    {
+        if(array_key_exists('password',$data))
+        {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        return parent::update($data, $id);
+    }
+
+    /**
      * Create a user and assign roles to it.
      *
      * @param array $data
      * @param array $roles
      */
-    public function createWithRoles($data, $roles)
+    public function createWithRoles(array $data, $roles)
     {
         $user = $this->create((array) $data);
 
@@ -39,7 +71,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
      * @param array $data
      * @param array $roles
      */
-    public function updateWithRoles($data, $roles, $id)
+    public function updateWithRoles(array $data, $roles, $id)
     {
         $user = $this->update((array) $data, $id);
 

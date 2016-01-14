@@ -44,11 +44,12 @@ class EventServiceProvider extends ServiceProvider
             $permissionManager = new PermissionManager();
             $permissionManager->registerDefault($module);
         });
-
+/*
         $events->listen('module.disabled', function ($module) {
             $permissionManager = new PermissionManager();
             $permissionManager->rollbackDefault($module);
         });
+*/
 
         $events->listen('auth.login', function($user) {
             $user->last_login = Carbon::now();

@@ -15,4 +15,16 @@ class EloquentPermission extends Model implements EntrustPermissionInterface
      * @var string
      */
     protected $table = 'user__permissions';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'display_name',
+        'description',
+        'module',
+    ];
 }

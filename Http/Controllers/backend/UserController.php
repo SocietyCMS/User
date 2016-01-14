@@ -9,6 +9,8 @@ use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\ResetRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
+use Modules\User\Repositories\Entrust\Criteria\RoleOrderCriteria;
+use Modules\User\Repositories\Entrust\Criteria\UserOrderCriteria;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
 
@@ -44,6 +46,7 @@ class UserController extends AdminBaseController
      */
     public function index()
     {
+        $this->user->pushCriteria(new UserOrderCriteria());
         $users = $this->user->all();
 
         return view('user::backend.users.index', compact('users', 'currentUser'));
@@ -56,6 +59,7 @@ class UserController extends AdminBaseController
      */
     public function create()
     {
+        $this->role->pushCriteria(new RoleOrderCriteria());
         $roles = $this->role->all();
 
         return view('user::backend.users.create', compact('roles'));
@@ -91,6 +95,8 @@ class UserController extends AdminBaseController
 
             return redirect()->route('backend::user.index');
         }
+
+        $this->role->pushCriteria(new RoleOrderCriteria());
         $roles = $this->role->all();
 
         return view('user::backend.users.edit', compact('user', 'roles'));
