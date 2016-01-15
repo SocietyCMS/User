@@ -16,18 +16,14 @@ class UserServiceProvider extends ServiceProvider
     /**
      * @var array
      */
-    protected $providers = [
-        'Sentinel' => 'Cartalyst\\Sentinel\\Laravel\\SentinelServiceProvider',
-    ];
-
-    /**
-     * @var array
-     */
     protected $middleware = [
         'User' => [
             'auth.guest'  => 'GuestMiddleware',
-            'logged.in'   => 'LoggedInMiddleware',
+            'loggedIn'    => 'LoggedInMiddleware',
             'userprofile' => 'UserProfileMiddleware',
+            'role'        => 'Entrust\Role',
+            'permission'  => 'Entrust\Permission',
+            'ability'     => 'Entrust\Ability',
         ],
     ];
 
@@ -40,7 +36,7 @@ class UserServiceProvider extends ServiceProvider
     {
         $this->registerMiddleware($this->app['router']);
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'user');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'user');
     }
 
     private function registerMiddleware($router)
@@ -61,40 +57,23 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(
-            $this->getUserPackageServiceProvider()
-        );
-
         $this->registerBindings();
-    }
-
-    private function getUserPackageServiceProvider()
-    {
-        $driver = config('society.user.config.driver', 'Sentinel');
-
-        if (!isset($this->providers[$driver])) {
-            throw new \Exception("Driver [{$driver}] does not exist");
-        }
-
-        return $this->providers[$driver];
     }
 
     private function registerBindings()
     {
-        $driver = config('society.user.config.driver', 'Sentinel');
-
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
-            "Modules\\User\\Repositories\\{$driver}\\{$driver}UserRepository"
+            "Modules\\User\\Repositories\\Entrust\\EntrustUserRepository"
         );
 
         $this->app->bind(
             'Modules\User\Repositories\RoleRepository',
-            "Modules\\User\\Repositories\\{$driver}\\{$driver}RoleRepository"
+            "Modules\\User\\Repositories\\Entrust\\EntrustRoleRepository"
         );
         $this->app->bind(
             'Modules\Core\Contracts\Authentication',
-            "Modules\\User\\Repositories\\{$driver}\\{$driver}Authentication"
+            "Modules\\User\\Repositories\\Entrust\\EntrustAuthentication"
         );
     }
 
@@ -107,7 +86,7 @@ class UserServiceProvider extends ServiceProvider
     {
         $viewPath = base_path('resources/views/modules/user');
 
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
             $sourcePath => $viewPath,
@@ -128,7 +107,7 @@ class UserServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'user');
         } else {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'user');
+            $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'user');
         }
     }
 
@@ -150,10 +129,10 @@ class UserServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . '/../Config/config.php' => config_path('user.php'),
+            __DIR__.'/../Config/config.php' => config_path('user.php'),
         ]);
         $this->mergeConfigFrom(
-            __DIR__ . '/../Config/config.php', 'user'
+            __DIR__.'/../Config/config.php', 'user'
         );
     }
 }

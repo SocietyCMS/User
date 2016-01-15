@@ -8,63 +8,18 @@ namespace Modules\User\Repositories;
 interface RoleRepository
 {
     /**
-     * Return all the roles.
+     * Create a user and assign roles to it.
      *
-     * @return mixed
+     * @param array $data
+     * @param array $roles
      */
-    public function all();
+    public function createWithUsers(array $data, $users);
 
     /**
-     * Create a role resource.
+     * Create a user and assign roles to it.
      *
-     * @return mixed
+     * @param array $data
+     * @param array $roles
      */
-    public function create($data);
-
-    /**
-     * Find a role by its id.
-     *
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function find($id);
-
-    /**
-     * Update a role.
-     *
-     * @param $id
-     * @param $data
-     *
-     * @return mixed
-     */
-    public function update($id, $data);
-
-    /**
-     * Update a role ans sync users.
-     *
-     * @param $id
-     * @param $data
-     *
-     * @return mixed
-     */
-    public function updateAndSyncUsers($id, $data, $users);
-
-    /**
-     * Delete a role.
-     *
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function delete($id);
-
-    /**
-     * Find a role by its name.
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function findByName($name);
+    public function updateWithUsers(array $data, $users, $id);
 }

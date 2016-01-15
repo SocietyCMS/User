@@ -1,9 +1,7 @@
 <?php
-
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-
-class CreateUserProfilesTable extends Migration
+use Illuminate\Database\Migrations\Migration;
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +10,15 @@ class CreateUserProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user__userprofiles', function (Blueprint $table) {
-
+        Schema::create('user__users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+
+            $table->string('email')->unique();
+
+            $table->string('title')->nullable();
 
             $table->text('description')->nullable();
             $table->text('office')->nullable();
@@ -30,13 +33,14 @@ class CreateUserProfilesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
 
+            $table->string('password', 60);
 
+            $table->timestamp('last_login');
+
+            $table->rememberToken();
             $table->timestamps();
-
-            $table->engine = 'InnoDB';
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -44,6 +48,6 @@ class CreateUserProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user__userprofiles');
+        Schema::drop('user__users');
     }
 }

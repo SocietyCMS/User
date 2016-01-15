@@ -2,9 +2,10 @@
 
 namespace Modules\User\Database\Seeders;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Modules\User\Database\Seeders\Tables\Role;
+use Modules\User\Database\Seeders\Tables\User;
 
 class UserTableSeeder extends Seeder
 {
@@ -17,7 +18,8 @@ class UserTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('Modules\\User\\Database\\Seeders\\SentinelGroupSeedTableSeeder');
-        $this->call('Modules\\User\\Database\\Seeders\\SentinelUserSeedTableSeeder');
+        $this->call(User::class);
+        $this->call(Role::class);
+
     }
 }

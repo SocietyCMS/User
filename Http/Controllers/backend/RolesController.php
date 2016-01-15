@@ -2,11 +2,13 @@
 
 namespace Modules\User\Http\Controllers\backend;
 
+use Modules\Core\Http\Controllers\AdminBaseController;
 use Modules\Core\Permissions\PermissionManager;
 use Modules\User\Http\Requests\RolesRequest;
+use Modules\User\Repositories\Entrust\Criteria\RoleOrderCriteria;
 use Modules\User\Repositories\RoleRepository;
 
-class RolesController extends BaseUserModuleController
+class RolesController extends AdminBaseController
 {
     /**
      * @var RoleRepository
@@ -18,7 +20,7 @@ class RolesController extends BaseUserModuleController
         parent::__construct();
 
         $this->permissions = $permissions;
-        $this->role = $role;
+        $this->role        = $role;
     }
 
     /**
@@ -28,6 +30,7 @@ class RolesController extends BaseUserModuleController
      */
     public function index()
     {
+        $this->role->pushCriteria(new RoleOrderCriteria());
         $roles = $this->role->all();
 
         return view('user::backend.roles.index', compact('roles'));
@@ -52,9 +55,7 @@ class RolesController extends BaseUserModuleController
      */
     public function store(RolesRequest $request)
     {
-        $data = $this->mergeRequestWithPermissions($request);
-
-        if($this->role->create($data)) {
+        if ($this->role->createWithUsers($request->all(), $request->users)) {
             flash(trans('user::messages.role created'));
         }
 
@@ -89,9 +90,10 @@ class RolesController extends BaseUserModuleController
      */
     public function update($id, RolesRequest $request)
     {
-        $data = $this->mergeRequestWithPermissions($request);
+        $permissions = $request->permissions ? array_keys($request->permissions) : [];
 
-        $this->role->updateAndSyncUsers($id, $data, $request->users);
+        $this->role->updateWithUsers($request->all(), $request->users, $id);
+        $this->role->attachPermissions($permissions, $id);
 
         flash(trans('user::messages.role updated'));
 

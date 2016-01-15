@@ -2,6 +2,7 @@
 
 namespace Modules\User\Composers;
 
+use Modules\User\Repositories\Entrust\Criteria\UserOrderCriteria;
 use Modules\User\Repositories\UserRepository;
 
 class UserListComposer
@@ -18,6 +19,7 @@ class UserListComposer
 
     public function compose($view)
     {
+        $this->user->pushCriteria(new UserOrderCriteria());
         $view->users = $this->user->all();
     }
 }

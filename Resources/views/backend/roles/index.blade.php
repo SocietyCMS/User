@@ -28,16 +28,25 @@
             <tr>
                 <td>
 
-                    <h4 class="ui header">
+                    <h4 class="ui left floated header">
                         <div class="content">
                             <a href="{{route('backend::user.role.edit', $role->id)}}">
-                                {{ $role->name }}
+                                {{ $role->display_name }}
                             </a>
+
+                            <div class="sub header">
+                                {{ $role->description }}
+                            </div>
+                        </div>
+                    </h4>
+
+                    <h5 class="ui right floated header">
+                        <div class="content">
                             <div class="sub header">
                                 {{trans_choice('user::roles.table.members', $role->users()->count())}}
                             </div>
                         </div>
-                    </h4>
+                    </h5>
 
                 </td>
                 <td>

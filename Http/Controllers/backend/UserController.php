@@ -4,14 +4,17 @@ namespace Modules\User\Http\Controllers\backend;
 
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
+use Modules\Core\Http\Controllers\AdminBaseController;
 use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\ResetRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
+use Modules\User\Repositories\Entrust\Criteria\RoleOrderCriteria;
+use Modules\User\Repositories\Entrust\Criteria\UserOrderCriteria;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
 
-class UserController extends BaseUserModuleController
+class UserController extends AdminBaseController
 {
     /**
      * @var UserRepository
@@ -21,10 +24,6 @@ class UserController extends BaseUserModuleController
      * @var RoleRepository
      */
     private $role;
-    /**
-     * @var Authentication
-     */
-    private $auth;
 
     /**
      * @param UserRepository $user
@@ -33,13 +32,11 @@ class UserController extends BaseUserModuleController
      */
     public function __construct(
         UserRepository $user,
-        RoleRepository $role,
-        Authentication $auth
+        RoleRepository $role
     ) {
         parent::__construct();
         $this->user = $user;
         $this->role = $role;
-        $this->auth = $auth;
     }
 
     /**
@@ -49,8 +46,8 @@ class UserController extends BaseUserModuleController
      */
     public function index()
     {
+        $this->user->pushCriteria(new UserOrderCriteria());
         $users = $this->user->all();
-        $currentUser = $this->auth->check();
 
         return view('user::backend.users.index', compact('users', 'currentUser'));
     }
@@ -62,6 +59,7 @@ class UserController extends BaseUserModuleController
      */
     public function create()
     {
+        $this->role->pushCriteria(new RoleOrderCriteria());
         $roles = $this->role->all();
 
         return view('user::backend.users.create', compact('roles'));
@@ -76,8 +74,7 @@ class UserController extends BaseUserModuleController
      */
     public function store(CreateUserRequest $request)
     {
-        $data = $this->mergeRequestWithPermissions($request);
-        $this->user->createWithRoles($data, $request->roles, $request->activated);
+        $this->user->createWithRoles($request->all(), $request->roles);
 
         flash(trans('user::messages.user created'));
 
@@ -98,6 +95,8 @@ class UserController extends BaseUserModuleController
 
             return redirect()->route('backend::user.index');
         }
+
+        $this->role->pushCriteria(new RoleOrderCriteria());
         $roles = $this->role->all();
 
         return view('user::backend.users.edit', compact('user', 'roles'));
@@ -113,7 +112,7 @@ class UserController extends BaseUserModuleController
      */
     public function update($id, UpdateUserRequest $request)
     {
-        $this->user->updateAndSyncRoles($id, $request->all(), $request->roles);
+        $this->user->updatewithRoles($request->all(),$request->roles, $id);
 
         flash(trans('user::messages.user updated'));
 

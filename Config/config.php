@@ -3,14 +3,6 @@
 return [
 
     /*
-     |--------------------------------------------------------------------------
-     | Define which user driver to use.
-     |--------------------------------------------------------------------------
-     | Current default and only option : Sentinel
-     */
-    'driver' => 'Sentinel',
-
-    /*
     |--------------------------------------------------------------------------
     | Define which route to redirect to after a successful login
     |--------------------------------------------------------------------------
@@ -20,8 +12,7 @@ return [
     |--------------------------------------------------------------------------
     | Login column(s)
     |--------------------------------------------------------------------------
-    | Define which column(s) you'd like to use to login with, currently
-    | only supported by the Sentinel user driver
+    | Define which column(s) you'd like to use to login with
     */
     'login-columns' => ['email'],
 

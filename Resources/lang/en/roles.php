@@ -22,8 +22,8 @@ return [
         'permissions' => 'Permissions',
     ],
     'form' => [
-        'name' => 'Role name',
-        'slug' => 'Role slug',
+        'name' => 'Name',
+        'description' => 'Description',
     ],
     'navigation' => [
         'back to index' => 'Back to roles index',

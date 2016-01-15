@@ -2,6 +2,8 @@
 
 namespace Modules\User\Http\Controllers;
 
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\PublicBaseController;
@@ -21,6 +23,7 @@ use Modules\User\Repositories\UserRepository;
 class AuthController extends PublicBaseController
 {
 
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
      * @var UserRepository
@@ -30,6 +33,8 @@ class AuthController extends PublicBaseController
      * @var Authentication
      */
     private $auth;
+
+    protected $redirectPath;
 
     /**
      * @param UserRepository $user
@@ -42,6 +47,7 @@ class AuthController extends PublicBaseController
     {
         $this->user = $user;
         $this->auth = $auth;
+        $this->redirectPath = route(config('society.user.config.redirect_route_after_login'));
     }
 
 
@@ -51,30 +57,6 @@ class AuthController extends PublicBaseController
     public function getLogin()
     {
         return view('user::public.login');
-    }
-
-    /**
-     * @param LoginRequest $request
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function postLogin(LoginRequest $request)
-    {
-        $credentials = [
-            'email'    => $request->email,
-            'password' => $request->password,
-        ];
-        $remember = (bool)$request->get('remember_me', false);
-
-        $error = $this->auth->login($credentials, $remember);
-        if (!$error) {
-            Flash::success(trans('user::messages.successfully logged in'));
-
-            return redirect()->intended(route(config('society.user.config.redirect_route_after_login')));
-        }
-
-        Flash::error($error);
-
-        return redirect()->back()->withInput();
     }
 
     /**

@@ -8,25 +8,36 @@ use Laracasts\Presenter\Presenter;
 class UserPresenter extends Presenter
 {
     /**
-     * Return the gravatar link for the users email.
-     *
-     * @param int $size
-     *
-     * @return string
-     */
-    public function gravatar($size = 90)
-    {
-        $email = md5($this->email);
-
-        return "//www.gravatar.com/avatar/$email?s=$size";
-    }
-
-    /**
      * @return string
      */
     public function fullname()
     {
-        return $this->name ?: $this->first_name.' '.$this->last_name;
+        return $this->name ?: $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function avatar()
+    {
+        return $this->smallAvatar();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function smallAvatar()
+    {
+
+        return $this->entity->getFirstMediaUrl('profile', 'square') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
+    }
+
+    /**
+     * @return mixed
+     */
+    public function largeAvatar()
+    {
+        return $this->entity->getFirstMediaUrl('profile', 'original250') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
     }
 
     public function createdAt()

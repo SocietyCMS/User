@@ -1,27 +1,38 @@
-@foreach ($permissions as $name => $value)
+@foreach ($permissions as $name => $permissionGroup)
     <h2 class="ui dividing header">{{ ucfirst($name) }}</h2>
 
-    @foreach ($value as $subPermissionTitle => $permissionActions)
-
-        @if (count($value) > 1 )
-            <h4 class="ui header">{{ ucfirst($subPermissionTitle) }}</h4>
-        @endif
-
-        <div class="ui four column  stackable divided grid segment">
-            @foreach ($permissionActions as $permissionAction => $permission)
-                <div class="column">
-                    <div class="ui toggle checkbox">
+    <table class="ui compact celled definition table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Permission</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($permissionGroup as  $permission)
+            <tr>
+                <td class="collapsing">
+                    <div class="ui fitted toggle checkbox">
                         <input type="checkbox"
-                               id="{{ "$name.$subPermissionTitle.$permissionAction" }}"
-                               name="permissions[{{ "$name.$subPermissionTitle.$permissionAction" }}]"
-                               @if(isset($model) && $model->hasAccess("$name.$subPermissionTitle.$permissionAction")) checked="checked" @endif
-                               value="true" >
-                        <label for="{{"$name.$subPermissionTitle.$permissionAction"}}">{{ ucfirst($permissionAction) }}</label>
+                               id="{{ $permission->name }}"
+                               name="permissions[{{ $permission->id }}]"
+                               @if(isset($model) && $model->hasPermission($permission->name)) checked="checked" @endif
+                               value="true" ><label></label>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                </td>
+                <td>
+                    <h4 class="ui left floated header">
+                        <div class="content">
+                            @lang($permission->display_name)
 
-    @endforeach
+                            <div class="sub header">
+                                @lang($permission->description)
+                            </div>
+                        </div>
+                    </h4>
+                </td>
+            </tr>
+        @endforeach
+    </table>
 
 @endforeach

@@ -3,7 +3,7 @@
 namespace Modules\User\Transformers;
 
 use League\Fractal;
-use Modules\User\Entities\Sentinel\EloquentUser;
+use Modules\User\Entities\Entrust\EloquentUser;
 
 class UserTransformer extends Fractal\TransformerAbstract
 {

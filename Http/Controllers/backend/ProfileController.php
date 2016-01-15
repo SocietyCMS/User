@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers\backend;
 use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
+use Modules\Core\Http\Controllers\AdminBaseController;
 use Modules\User\Http\Requests\EditProfileRequest;
 use Modules\User\Http\Requests\UpdateProfilePasswordRequest;
 use Modules\User\Http\Requests\UpdateProfileUserRequest;
@@ -16,7 +17,7 @@ use Modules\User\Repositories\UserRepository;
  * Class ProfileController
  * @package Modules\User\Http\Controllers\backend
  */
-class ProfileController extends BaseUserModuleController
+class ProfileController extends AdminBaseController
 {
     /**
      * @var UserRepository
@@ -26,10 +27,6 @@ class ProfileController extends BaseUserModuleController
      * @var RoleRepository
      */
     private $role;
-    /**
-     * @var Authentication
-     */
-    private $auth;
 
     /**
      * @param UserRepository $user
@@ -38,14 +35,12 @@ class ProfileController extends BaseUserModuleController
      */
     public function __construct(
         UserRepository $user,
-        RoleRepository $role,
-        Authentication $auth
+        RoleRepository $role
     )
     {
         parent::__construct();
         $this->user = $user;
         $this->role = $role;
-        $this->auth = $auth;
 
         $this->middleware('userprofile');
     }
