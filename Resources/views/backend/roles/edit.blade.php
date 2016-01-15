@@ -45,5 +45,11 @@
                 .popup();
         $('#usersMultiselect')
                 .dropdown();
+
+        @if($role->name == 'admin')
+            $('.ui.fitted.slider.checkbox').checkbox( 'set disabled' );
+        @endif
+
+
     </script>
 @endsection

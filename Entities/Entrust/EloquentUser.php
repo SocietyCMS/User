@@ -34,6 +34,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      * @var array
      */
     protected $fillable = [
+        'title',
         'first_name',
         'last_name',
         'email',

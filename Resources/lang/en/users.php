@@ -1,22 +1,24 @@
 <?php
 
 return [
-    'button' => [
+    'button'                    => [
         'new-user' => 'New User',
     ],
-    'title' => [
+    'title'                     => [
         'users'           => 'Users',
         'users and roles' => 'Users and Roles',
         'new-user'        => 'New user',
         'edit-user'       => 'Edit user',
     ],
-    'tabs' => [
+    'tabs'                      => [
         'user'           => 'User',
+        'profile'        => 'Profile',
         'roles'          => 'Roles',
         'permissions'    => 'Permissions',
         'reset password' => 'Reset password',
     ],
-    'form' => [
+    'form'                      => [
+        'title'                     => 'Title',
         'first-name'                => 'First name',
         'last-name'                 => 'Last name',
         'email'                     => 'Email',
@@ -26,7 +28,7 @@ return [
         'new password'              => 'New password',
         'new password confirmation' => 'New password confirmation',
     ],
-    'table' => [
+    'table'                     => [
         'created-at' => 'Created At',
         'updated-at' => 'Updated At',
         'last_login' => 'Last Login',
@@ -36,6 +38,10 @@ return [
         'actions'    => 'Actions',
         'activated'  => 'Activated',
         'user'       => 'User',
+    ],
+    'personTitle'               => [
+        'male'   => 'Mr.',
+        'female' => 'Ms.',
     ],
     'active'                    => 'Active',
     'deactivated'               => 'Deactivated',

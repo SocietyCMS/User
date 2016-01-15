@@ -12,7 +12,7 @@
         @foreach ($permissionGroup as  $permission)
             <tr>
                 <td class="collapsing">
-                    <div class="ui fitted slider checkbox">
+                    <div class="ui fitted toggle checkbox">
                         <input type="checkbox"
                                id="{{ $permission->name }}"
                                name="permissions[{{ $permission->id }}]"
