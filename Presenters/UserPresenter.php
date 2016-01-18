@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Laracasts\Presenter\Presenter;
 use Laravolt\Avatar\Facade as Avatar;
 
+
 class UserPresenter extends Presenter
 {
     /**
@@ -21,23 +22,7 @@ class UserPresenter extends Presenter
      */
     public function avatar()
     {
-        return $this->smallAvatar();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function smallAvatar()
-    {
-        return $this->entity->getFirstMediaUrl('profile', 'square') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
-    }
-
-    /**
-     * @return mixed
-     */
-    public function largeAvatar()
-    {
-        return $this->entity->getFirstMediaUrl('profile', 'original250') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
+        return Avatar::create($this->fullname())->toBase64();
     }
 
     public function createdAt()
