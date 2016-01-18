@@ -38,7 +38,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         'first_name',
         'last_name',
         'email',
-        'description',
         'office',
         'bio',
         'street',

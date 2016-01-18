@@ -18,7 +18,6 @@ return [
         'reset password' => 'Reset password',
     ],
     'form'                      => [
-        'title'                     => 'Title',
         'first-name'                => 'First name',
         'last-name'                 => 'Last name',
         'email'                     => 'Email',

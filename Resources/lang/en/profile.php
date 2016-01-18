@@ -4,11 +4,13 @@ return [
     'title'    => [
         'profile'  => 'Profile',
         'password' => 'Password',
+        'user information' => 'User Information',
+        'contact information' => 'Contact Information'
     ],
     'profile'  => [
         'picture'                    => 'Profile picture',
         'upload new profile picture' => 'Upload new profile picture',
-        'description'                => 'Description',
+        'title'                      => 'Title',
         'office'                     => 'Office',
         'bio'                        => 'Bio',
         'street'                     => 'Street',

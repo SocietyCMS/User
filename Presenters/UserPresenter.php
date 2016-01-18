@@ -4,6 +4,7 @@ namespace Modules\User\Presenters;
 
 use Carbon\Carbon;
 use Laracasts\Presenter\Presenter;
+use Laravolt\Avatar\Facade as Avatar;
 
 class UserPresenter extends Presenter
 {
@@ -12,7 +13,7 @@ class UserPresenter extends Presenter
      */
     public function fullname()
     {
-        return $this->name ?: $this->first_name . ' ' . $this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**
@@ -28,7 +29,6 @@ class UserPresenter extends Presenter
      */
     public function smallAvatar()
     {
-
         return $this->entity->getFirstMediaUrl('profile', 'square') ?: "http://semantic-ui.com/images/avatar/large/elliot.jpg";
     }
 

@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
 
             $table->string('title')->nullable();
 
-            $table->text('description')->nullable();
             $table->text('office')->nullable();
 
             $table->text('bio')->nullable();
