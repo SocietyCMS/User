@@ -7,6 +7,10 @@ use Laracasts\Presenter\Presenter;
 use Laravolt\Avatar\Facade as Avatar;
 
 
+/**
+ * Class UserPresenter
+ * @package Modules\User\Presenters
+ */
 class UserPresenter extends Presenter
 {
     /**
@@ -22,9 +26,12 @@ class UserPresenter extends Presenter
      */
     public function avatar()
     {
-        return Avatar::create($this->fullname())->toBase64();
+        return $this->entity->getFirstMediaUrl('profile', 'square') ?: Avatar::create($this->fullname())->toBase64();
     }
 
+    /**
+     * @return string
+     */
     public function createdAt()
     {
         $created = $this->created_at;
@@ -33,6 +40,9 @@ class UserPresenter extends Presenter
             ->formatLocalized('%d %b. %Y');
     }
 
+    /**
+     * @return string
+     */
     public function updatedAt()
     {
         $updated = $this->updated_at;
@@ -41,6 +51,9 @@ class UserPresenter extends Presenter
             ->formatLocalized('%d %b. %Y');
     }
 
+    /**
+     * @return string
+     */
     public function lastLogin()
     {
         if ($this->last_login) {

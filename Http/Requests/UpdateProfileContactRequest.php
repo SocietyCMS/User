@@ -5,14 +5,11 @@ namespace Modules\User\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Modules\Core\Contracts\Authentication;
 
-class UpdateProfileUserRequest extends FormRequest
+class UpdateProfileContactRequest extends FormRequest
 {
-    public function rules(Authentication $auth)
+    public function rules()
     {
         return [
-            'email'      => "required|email|unique:user__users,email,{$auth->id()}",
-            'first_name' => 'required',
-            'last_name'  => 'required',
         ];
     }
 

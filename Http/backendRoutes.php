@@ -27,10 +27,11 @@ $router->group(['prefix' => '/user'], function ($router) {
 
     //Profile
     get('profile/', ['as' => 'backend::user.profile.show', 'uses' => 'ProfileController@currentUser']);
-    get('profile/{id}/edit', ['as' => 'backend::user.profile.edit', 'uses' => 'ProfileController@edit']);
 
-    put('profile/{id}/edit/user',
+    put('profile/user',
         ['as' => 'backend::user.profile.update.user', 'uses' => 'ProfileController@updateUser']);
-    put('profile/{id}/edit/password',
+    put('profile/contact',
+        ['as' => 'backend::user.profile.update.contact', 'uses' => 'ProfileController@updateContact']);
+    put('profile/password',
         ['as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
 });

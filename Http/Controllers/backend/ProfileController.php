@@ -7,6 +7,7 @@ use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\AdminBaseController;
 use Modules\User\Http\Requests\EditProfileRequest;
+use Modules\User\Http\Requests\UpdateProfileContactRequest;
 use Modules\User\Http\Requests\UpdateProfilePasswordRequest;
 use Modules\User\Http\Requests\UpdateProfileUserRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
@@ -51,16 +52,7 @@ class ProfileController extends AdminBaseController
     public function currentUser()
     {
         $user = $this->auth->check();
-        return view('user::backend.profile.edit', compact('user'));
-    }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit(EditProfileRequest $request, $id)
-    {
-        $user = $this->user->find($id);
         return view('user::backend.profile.edit', compact('user'));
     }
 
@@ -68,15 +60,31 @@ class ProfileController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param int               $id
-     * @param UpdateUserRequest $request
+     * @param UpdateProfileUserRequest|UpdateUserRequest $request
      *
+     * @param int                                        $id
      * @return Response
      */
-    public function updateUser(UpdateProfileUserRequest $request, $id)
+    public function updateUser(UpdateProfileUserRequest $request)
     {
-        $user = $this->user->find($id);
-        $this->user->update($user, $request->all());
+        $this->user->update($request->all(), $this->auth->id());
+
+        flash(trans('user::messages.profile updated'));
+
+        return redirect()->back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateProfileUserRequest|UpdateUserRequest $request
+     *
+     * @param int                                        $id
+     * @return Response
+     */
+    public function updateContact(UpdateProfileContactRequest $request)
+    {
+        $this->user->update($request->all(), $this->auth->id());
 
         flash(trans('user::messages.profile updated'));
 
@@ -91,27 +99,24 @@ class ProfileController extends AdminBaseController
      *
      * @return Response
      */
-    public function updatePassword(UpdateProfilePasswordRequest $request, $id)
+    public function updatePassword(UpdateProfilePasswordRequest $request)
     {
 
-        $user = $this->user->find($id);
+        $user = $this->user->find($this->auth->id());
 
         $credentials = [
+            'id'       => $this->auth->id(),
             'email'    => $user->email,
             'password' => $request->old_password,
         ];
 
-        if(!$this->auth->validateCredentials($id, $credentials))
-        {
+        if (!$this->auth->attempt($credentials)) {
             Flash::error(trans('user::messages.invalid old password'));
 
             return redirect()->back();
         }
 
-        $this->user->update($user, ['password' => Hash::make($request->input('password'))]);
-
-
-        $user->profile->update($request->all());
+        $this->user->update($request->all(), $this->auth->id());
 
         flash(trans('user::messages.password updated'));
 

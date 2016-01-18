@@ -54,8 +54,8 @@ class ProfileController extends ApiBaseController
     {
         $user = $this->user->find($id);
 
-        $user->profile->clearMediaCollection('profile');
-        $savedImage = $user->profile->addMedia($request->files->get('image'))->toMediaLibrary('profile');
+        $user->clearMediaCollection('profile');
+        $savedImage = $user->addMedia($request->files->get('image'))->toMediaLibrary('profile');
 
         return $this->response->item($savedImage, new ProfilePictureTransformer());
     }
