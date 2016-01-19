@@ -2,11 +2,11 @@
 
 return [
     'title'    => [
-        'profile'  => 'Profile',
-        'password' => 'Password',
-        'user information' => 'User Information',
+        'profile'             => 'Profile',
+        'password'            => 'Password',
+        'user information'    => 'User Information',
         'address information' => 'Address Information',
-        'contact information' => 'Contact Information'
+        'contact information' => 'Contact Information',
     ],
     'profile'  => [
         'picture'                    => 'Profile picture',

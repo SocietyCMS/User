@@ -1,3 +1,25 @@
+
+<h4 class="ui dividing header">@lang('user::profile.profile.picture')</h4>
+<div class="field" id="profileContainer">
+    <div class="ui grid">
+        <div class="two wide column">
+            <img class="ui small bordered image" src="{{ $user->present()->avatar }}"
+                 id="userProfilePicture">
+        </div>
+        <div class="fourteen wide column">
+
+            <a class="ui basic button" id="uploadImageButton">
+                @lang('user::profile.profile.upload new profile picture')
+            </a>
+            <div class="ui basic loading button" id="uploadInProgress">Loading</div>
+            <p> @lang('core::messages.info.upload picture by drag and drop')</p>
+
+        </div>
+
+    </div>
+</div>
+
+
 <h4 class="ui dividing header">@lang('user::profile.title.address information')</h4>
 
 <div class="field {{ $errors->has('title') ? 'error' : '' }}">
@@ -115,3 +137,54 @@
 
     {!! $errors->first('mobile', '<span class="help-block">:message</span>') !!}
 </div>
+
+<script>
+
+    var dragAndDropModule = new fineUploader.DragAndDrop({
+        dropZoneElements: [document.getElementById('profileContainer')],
+        callbacks: {
+            processingDroppedFilesComplete: function (files, dropTarget) {
+                fineUploaderBasicInstanceImages.addFiles(files);
+            }
+        }
+    });
+
+    var fineUploaderBasicInstanceImages = new fineUploader.FineUploaderBasic({
+        button: document.getElementById('uploadImageButton'),
+        request: {
+            endpoint: '{{ apiRoute('v1', 'api.user.profile.store', ['profile' => $user->id])}}',
+            inputName: 'image',
+            customHeaders: {
+                "Authorization": "Bearer {{$jwtoken}}"
+            }
+        },
+        callbacks: {
+            onComplete: function (id, name, responseJSON) {
+                VueInstanceImage.complete(responseJSON)
+            },
+            onUpload: function () {
+                $('#uploadImageButton').hide();
+                $('#uploadInProgress').show();
+            },
+            onAllComplete: function (succeeded, failed) {
+                $('#uploadImageButton').show();
+                $('#uploadInProgress').hide();
+            }
+        }
+    });
+
+    $('#uploadInProgress').hide();
+    VueInstanceImage = new Vue({
+        el: '#profileContainer',
+        data: {},
+        ready: function () {
+
+        },
+        methods: {
+            complete: function (responseJSON) {
+                $('#userProfilePicture').attr("src", responseJSON.data.thumbnail.square);
+            }
+        }
+
+    });
+</script>

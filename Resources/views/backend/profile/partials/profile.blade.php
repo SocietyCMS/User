@@ -14,7 +14,7 @@
 
                     <div class="ui grid">
                         <div class="two wide column">
-                            <img class="ui tiny bordered image" src="{{ $user->present()->avatar }}"
+                            <img class="ui small bordered image" src="{{ $user->present()->avatar }}"
                                  id="userProfilePicture">
                         </div>
                         <div class="fourteen wide column">
