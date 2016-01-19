@@ -5,6 +5,7 @@ return [
         'profile'  => 'Profile',
         'password' => 'Password',
         'user information' => 'User Information',
+        'address information' => 'Address Information',
         'contact information' => 'Contact Information'
     ],
     'profile'  => [

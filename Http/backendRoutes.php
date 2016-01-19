@@ -31,7 +31,7 @@ $router->group(['prefix' => '/user'], function ($router) {
     put('profile/user',
         ['as' => 'backend::user.profile.update.user', 'uses' => 'ProfileController@updateUser']);
     put('profile/contact',
-        ['as' => 'backend::user.profile.update.contact', 'uses' => 'ProfileController@updateContact']);
+        ['middleware' => ['permission:user::change-own-contact-info'],'as' => 'backend::user.profile.update.contact', 'uses' => 'ProfileController@updateContact']);
     put('profile/password',
-        ['as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
+        ['middleware' => ['permission:user::change-own-password'],'as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
 });

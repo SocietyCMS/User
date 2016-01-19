@@ -52,7 +52,11 @@ class ProfileController extends ApiBaseController
      */
     public function store(MediaImageRequest $request, $id)
     {
-        $user = $this->user->find($id);
+        if($this->auth->user()->hasRole('admin')){
+            $user = $this->user->find($id);
+        } else {
+            $user = $this->auth->user();
+        }
 
         $user->clearMediaCollection('profile');
         $savedImage = $user->addMedia($request->files->get('image'))->toMediaLibrary('profile');

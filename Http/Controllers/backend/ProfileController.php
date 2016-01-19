@@ -61,13 +61,29 @@ class ProfileController extends AdminBaseController
      * Update the specified resource in storage.
      *
      * @param UpdateProfileUserRequest|UpdateUserRequest $request
-     *
-     * @param int                                        $id
      * @return Response
+     * @internal param int $id
      */
     public function updateUser(UpdateProfileUserRequest $request)
     {
-        $this->user->update($request->all(), $this->auth->id());
+        $input = [];
+
+        if($this->auth->user()->can('user::change-own-name'))
+        {
+            $input = array_merge($input, [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+            ]);
+        }
+
+        if($this->auth->user()->can('user::change-own-email'))
+        {
+            $input = array_merge($input, [
+                'email' => $request->email,
+            ]);
+        }
+
+        $this->user->update($input, $this->auth->id());
 
         flash(trans('user::messages.profile updated'));
 
@@ -77,10 +93,9 @@ class ProfileController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateProfileUserRequest|UpdateUserRequest $request
-     *
-     * @param int                                        $id
+     * @param UpdateProfileContactRequest|UpdateProfileUserRequest|UpdateUserRequest $request
      * @return Response
+     * @internal param int $id
      */
     public function updateContact(UpdateProfileContactRequest $request)
     {
@@ -94,10 +109,9 @@ class ProfileController extends AdminBaseController
     /**
      * Update the password of the given user.
      *
-     * @param int               $id
-     * @param UpdateUserRequest $request
-     *
+     * @param UpdateProfilePasswordRequest|UpdateUserRequest $request
      * @return Response
+     * @internal param int $id
      */
     public function updatePassword(UpdateProfilePasswordRequest $request)
     {

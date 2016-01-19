@@ -10,7 +10,6 @@ $api->version('v1', function ($api) {
 
         $api->resource('user', 'UserController', ['only' => ['index','store', 'update', 'destroy']]);
 
-        $api->resource('profile', 'ProfileController', ['only' => ['index', 'update']]);
-        $api->post('profile/{profile}', ['as' => 'api.user.profile.store', 'uses' => 'ProfileController@store']);
+        $api->post('profile/{profile}', ['middleware' => ['permission:user::change-own-profile-picture'], 'as' => 'api.user.profile.store', 'uses' => 'ProfileController@store']);
     });
 });

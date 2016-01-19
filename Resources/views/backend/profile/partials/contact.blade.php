@@ -4,7 +4,7 @@
             {{ method_field('PUT') }}
             {!! csrf_field() !!}
             <div class="content">
-                @lang('user::profile.title.contact information')
+                @lang('user::profile.title.address information')
             </div>
         </h5>
         <div class="ui attached segment">
@@ -24,28 +24,6 @@
                 </div>
 
                 {!! $errors->first('gender', '<span class="help-block">:message</span>') !!}
-            </div>
-
-            <div class="field {{ $errors->has('office') ? 'error' : '' }}">
-                <label for="office">@lang('user::profile.profile.office')</label>
-                <input type="text"
-                       id="office"
-                       name="office"
-                       value="{{ old('office', isset($user)?$user->office:null) }}"
-                       placeholder="@lang('user::profile.profile.office')">
-
-                {!! $errors->first('office', '<span class="help-block">:message</span>') !!}
-            </div>
-
-            <div class="field {{ $errors->has('bio') ? 'error' : '' }}">
-                <label for="bio">@lang('user::profile.profile.bio')</label>
-                <input type="text"
-                       id="bio"
-                       name="bio"
-                       value="{{ old('bio', isset($user)?$user->bio:null) }}"
-                       placeholder="@lang('user::profile.profile.bio')">
-
-                {!! $errors->first('bio', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class="field {{ $errors->has('street') ? 'error' : '' }}">
@@ -93,6 +71,40 @@
 
                 {!! $errors->first('country', '<span class="help-block">:message</span>') !!}
             </div>
+
+        </div>
+        <h5 class="ui attached header">
+            @lang('user::profile.title.user information')
+        </h5>
+        <div class="ui attached segment">
+
+            <div class="field {{ $errors->has('office') ? 'error' : '' }}">
+                <label for="office">@lang('user::profile.profile.office')</label>
+                <input type="text"
+                       id="office"
+                       name="office"
+                       value="{{ old('office', isset($user)?$user->office:null) }}"
+                       placeholder="@lang('user::profile.profile.office')">
+
+                {!! $errors->first('office', '<span class="help-block">:message</span>') !!}
+            </div>
+
+            <div class="field {{ $errors->has('bio') ? 'error' : '' }}">
+                <label for="bio">@lang('user::profile.profile.bio')</label>
+                <input type="text"
+                       id="bio"
+                       name="bio"
+                       value="{{ old('bio', isset($user)?$user->bio:null) }}"
+                       placeholder="@lang('user::profile.profile.bio')">
+
+                {!! $errors->first('bio', '<span class="help-block">:message</span>') !!}
+            </div>
+
+        </div>
+        <h5 class="ui attached header">
+            @lang('user::profile.title.contact information')
+        </h5>
+        <div class="ui attached segment">
 
             <div class="field {{ $errors->has('phone') ? 'error' : '' }}">
                 <label for="phone">@lang('user::profile.profile.phone')</label>
