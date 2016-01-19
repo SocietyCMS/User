@@ -19,6 +19,8 @@ class User extends Seeder
     {
         DB::table('user__users')->delete();
 
+        $faker = \Faker\Factory::create('de_CH');
+
         $adminUser = DB::table('user__users')->insert([
             'first_name' => 'SocietyCMS',
             'last_name' => 'Administrator',
@@ -26,6 +28,18 @@ class User extends Seeder
             'password' => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+
+            'title' => $faker->title,
+            'description' => $faker->sentence,
+            'office' => $faker->company,
+            'bio' => $faker->paragraph,
+            'street' => $faker->streetAddress,
+            'city' => $faker->city,
+            'zip' => $faker->postcode,
+            'country' => $faker->country,
+            'phone' => $faker->phoneNumber,
+            'mobile' => $faker->phoneNumber,
+            'last_login' => $faker->dateTimeThisYear,
         ]);
 
         $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create();
