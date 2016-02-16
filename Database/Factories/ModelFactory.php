@@ -16,7 +16,6 @@ $factory->define(\Modules\User\Entities\Entrust\EloquentUser::class, function (F
         'last_name' => $faker->lastName,
         'email' => $faker->email,
         'title' => $faker->title,
-        'description' => $faker->sentence,
         'office' => $faker->company,
         'bio' => $faker->paragraph,
         'street' => $faker->streetAddress,

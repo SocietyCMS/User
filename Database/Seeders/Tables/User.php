@@ -30,7 +30,6 @@ class User extends Seeder
             'updated_at' => Carbon::now(),
 
             'title' => $faker->title,
-            'description' => $faker->sentence,
             'office' => $faker->company,
             'bio' => $faker->paragraph,
             'street' => $faker->streetAddress,
