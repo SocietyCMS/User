@@ -20,11 +20,4 @@
     {!! $errors->first('description', '<span class="help-block">:message</span>') !!}
 </div>
 
-<div class="field">
-    <label>{{ trans('user::roles.title.users with this roles') }}</label>
-    <select class="ui fluid search dropdown" multiple="" name="users[]" id="usersMultiselect">
-        @foreach ($users as $user)
-            <option value="{{ $user->id }}" @if(isset($role) && $user->hasRole($role->name)) selected @endif >{{ $user->present()->fullname }}</option>
-        @endforeach
-    </select>
-</div>
+@include('user::backend.fields.users')

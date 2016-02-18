@@ -59,10 +59,7 @@ class UserController extends AdminBaseController
      */
     public function create()
     {
-        $this->role->pushCriteria(new RoleOrderCriteria());
-        $roles = $this->role->all();
-
-        return view('user::backend.users.create', compact('roles'));
+        return view('user::backend.users.create');
     }
 
     /**
@@ -96,10 +93,7 @@ class UserController extends AdminBaseController
             return redirect()->route('backend::user.index');
         }
 
-        $this->role->pushCriteria(new RoleOrderCriteria());
-        $roles = $this->role->all();
-
-        return view('user::backend.users.edit', compact('user', 'roles'));
+        return view('user::backend.users.edit', compact('user'));
     }
 
     /**
