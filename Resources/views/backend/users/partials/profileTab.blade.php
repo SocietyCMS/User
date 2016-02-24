@@ -155,7 +155,7 @@
             endpoint: '{{ apiRoute('v1', 'api.user.profile.store', ['profile' => $user->id])}}',
             inputName: 'image',
             customHeaders: {
-                "Authorization": "Bearer {{$jwtoken}}"
+                "Authorization": "Bearer " + societycms.jwtoken
             }
         },
         callbacks: {
