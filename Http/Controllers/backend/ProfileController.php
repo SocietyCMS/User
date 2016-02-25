@@ -60,7 +60,7 @@ class ProfileController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateProfileUserRequest|UpdateUserRequest $request
+     * @param UpdateProfileUserRequest $request
      * @return Response
      * @internal param int $id
      */
@@ -93,7 +93,7 @@ class ProfileController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateProfileContactRequest|UpdateProfileUserRequest|UpdateUserRequest $request
+     * @param UpdateProfileContactRequest $request
      * @return Response
      * @internal param int $id
      */

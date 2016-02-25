@@ -10,9 +10,9 @@ class UpdateProfileUserRequest extends FormRequest
     public function rules(Authentication $auth)
     {
         return [
-            'email'      => "required|email|unique:user__users,email,{$auth->id()}",
-            'first_name' => 'required',
-            'last_name'  => 'required',
+            'email'      => "sometimes|required|email|unique:user__users,email,{$auth->id()}",
+            'first_name' => 'sometimes|required',
+            'last_name'  => 'sometimes|required',
         ];
     }
 

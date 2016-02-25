@@ -40,8 +40,8 @@
                        name="first_name"
                        value="{{ old('first_name', isset($user)?$user->first_name:null ) }}"
                        placeholder="@lang('user::users.form.first-name')"
-                        @if(!\Entrust::can('user::change-own-name'))
-                            disabled
+                       @if(!\Entrust::can('user::change-own-name'))
+                       disabled
                         @endif
                 >
 
@@ -55,8 +55,8 @@
                        name="last_name"
                        value="{{ old('last_name', isset($user)?$user->last_name:null) }}"
                        placeholder="@lang('user::users.form.last-name')"
-                        @if(!\Entrust::can('user::change-own-name'))
-                            disabled
+                       @if(!\Entrust::can('user::change-own-name'))
+                       disabled
                         @endif
                 >
 
@@ -69,12 +69,11 @@
                        id="email"
                        name="email"
                        value="{{ old('email',isset($user)?$user->email:null) }}"
-                       placeholder="@lang('user::users.form.email')">
-
-                        @if(!\Entrust::can('user::change-own-email'))
-                            disabled
+                       placeholder="@lang('user::users.form.email')"
+                       @if(!\Entrust::can('user::change-own-email'))
+                       disabled
                         @endif
-
+                >
                 {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
