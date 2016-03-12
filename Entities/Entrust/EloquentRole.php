@@ -38,17 +38,6 @@ class EloquentRole extends Model implements EntrustRoleInterface
     protected $presenter = 'Modules\User\Presenters\RolePresenter';
 
     /**
-     * Many-to-Many relations with the permission model.
-     * Named "perms" for backwards compatibility. Also because "perms" is short and sweet.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function perms()
-    {
-        return $this->belongsToMany(Config::get('entrust.permission'), Config::get('entrust.permission_role_table'), Config::get('entrust.role_foreign_key'), Config::get('entrust.permission_foreign_key'));
-    }
-
-    /**
      * Checks if the role has a permission by its name.
      *
      * @param string|array $name       Permission name or array of permission names.

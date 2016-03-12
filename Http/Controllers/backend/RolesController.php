@@ -20,7 +20,7 @@ class RolesController extends AdminBaseController
         parent::__construct();
 
         $this->permissions = $permissions;
-        $this->role        = $role;
+        $this->role = $role;
     }
 
     /**
@@ -32,7 +32,6 @@ class RolesController extends AdminBaseController
     {
         $this->role->pushCriteria(new RoleOrderCriteria());
         $roles = $this->role->all();
-
         return view('user::backend.roles.index', compact('roles'));
     }
 
@@ -71,7 +70,7 @@ class RolesController extends AdminBaseController
      */
     public function edit($id)
     {
-        if (!$role = $this->role->find($id)) {
+        if (! $role = $this->role->find($id)) {
             flash()->error(trans('user::messages.role not found'));
 
             return redirect()->route('backend::user.role.index');
@@ -83,7 +82,7 @@ class RolesController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param int          $id
+     * @param int $id
      * @param RolesRequest $request
      *
      * @return Response

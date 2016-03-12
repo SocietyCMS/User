@@ -69,15 +69,4 @@
         @endforeach
         </tbody>
     </table>
-
-@endsection
-
-@section('javascript')
-    <script>
-        $('.dropdown')
-                .dropdown({
-                    // you can use any ui transition
-                    transition: 'drop'
-                });
-    </script>
 @endsection
