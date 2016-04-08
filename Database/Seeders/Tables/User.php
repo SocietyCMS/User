@@ -21,7 +21,7 @@ class User extends Seeder
 
         $faker = \Faker\Factory::create('de_CH');
 
-        $adminUser = DB::table('user__users')->insert([
+        $adminUser = [
             'first_name' => 'SocietyCMS',
             'last_name' => 'Administrator',
             'email' => 'admin@societycms.com',
@@ -39,7 +39,8 @@ class User extends Seeder
             'phone' => $faker->phoneNumber,
             'mobile' => $faker->phoneNumber,
             'last_login' => $faker->dateTimeThisYear,
-        ]);
+        ];
+        //DB::table('user__users')->insert($adminUser);
 
         $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create();
     }
