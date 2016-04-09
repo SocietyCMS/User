@@ -40,7 +40,7 @@ class User extends Seeder
             'mobile' => $faker->phoneNumber,
             'last_login' => $faker->dateTimeThisYear,
         ];
-        //DB::table('user__users')->insert($adminUser);
+        DB::table('user__users')->insert($adminUser);
 
         $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create();
     }
