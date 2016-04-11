@@ -4,6 +4,7 @@ namespace Modules\User\Traits\Activity;
 
 use Carbon\Carbon;
 use Modules\User\Entities\Eloquent\EloquentActivity as Activity;
+use Modules\User\Entities\Eloquent\EloquentActivity;
 
 /**
  * Class RecordsActivity.
@@ -85,5 +86,13 @@ trait RecordsActivity
         return [
             'created', 'updated',
         ];
+    }
+
+    /**
+     * Get all of the owning Activity models.
+     */
+    public function activities()
+    {
+        return $this->morphMany(EloquentActivity::class, 'subject');
     }
 }
