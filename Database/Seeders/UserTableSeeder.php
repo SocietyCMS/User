@@ -17,9 +17,5 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        $this->call(User::class);
-        $this->call(Role::class);
-
     }
 }
