@@ -31,6 +31,8 @@ class DemoTableSeeder extends Seeder
         DB::table('user__permission_role')->delete();
 
         $this->createAdmin();
+        $this->createDemo();
+
         $this->createUsers();
     }
 
@@ -68,6 +70,42 @@ class DemoTableSeeder extends Seeder
         $adminUser = (new EloquentUser())->create($adminUserInfo);
         $adminRole = (new EloquentRole())->create($adminRoleInfo);
         $adminUser->attachRole($adminRole);
+    }
+
+    private function createDemo()
+    {
+        $faker = \Faker\Factory::create();
+        $demoUserInfo = [
+            'first_name' => 'Demo',
+            'last_name' => 'User',
+            'email' => 'demo@societycms.com',
+            'password' => bcrypt('secret'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+
+            'title' => $faker->title,
+            'office' => $faker->company,
+            'bio' => $faker->paragraph,
+            'street' => $faker->streetAddress,
+            'city' => $faker->city,
+            'zip' => $faker->postcode,
+            'country' => $faker->country,
+            'phone' => $faker->phoneNumber,
+            'mobile' => $faker->phoneNumber,
+            'last_login' => $faker->dateTimeThisYear,
+        ];
+
+        $demoRoleInfo = [
+            'name' => 'demo',
+            'display_name' => 'User Group',
+            'description' => 'Unprivileged User',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+
+        $demoUser = (new EloquentUser())->create($demoUserInfo);
+        $demoRole = (new EloquentRole())->create($demoRoleInfo);
+        $demoUser->attachRole($demoRole);
     }
 
     private function createUsers()
