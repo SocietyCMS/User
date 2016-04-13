@@ -34,9 +34,10 @@ class UserPresenter extends Presenter
      */
     public function createdAt()
     {
-        $created = $this->created_at;
-
-        return Carbon::createFromFormat('Y-m-d H:i:s', $created)
+        if (!$this->created_at || $this->created_at == '0000-00-00 00:00:00') {
+            return null;
+        }
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)
             ->formatLocalized('%d %b. %Y');
     }
 
@@ -45,9 +46,10 @@ class UserPresenter extends Presenter
      */
     public function updatedAt()
     {
-        $updated = $this->updated_at;
-
-        return Carbon::createFromFormat('Y-m-d H:i:s', $updated)
+        if (!$this->updated_at || $this->updated_at == '0000-00-00 00:00:00') {
+            return null;
+        }
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)
             ->formatLocalized('%d %b. %Y');
     }
 
@@ -56,9 +58,11 @@ class UserPresenter extends Presenter
      */
     public function lastLogin()
     {
-        if ($this->last_login) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $this->last_login)
-                ->diffForHumans();
+        if (!$this->last_login || $this->last_login == '0000-00-00 00:00:00') {
+            return null;
         }
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->last_login)
+                ->diffForHumans();
+
     }
 }
