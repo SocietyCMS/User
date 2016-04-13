@@ -2,10 +2,12 @@
 
 namespace Modules\User\Repositories;
 
+use Modules\Core\Repositories\BaseRepository;
+
 /**
  * Interface RoleRepository.
  */
-interface RoleRepository
+interface RoleRepository extends BaseRepository
 {
     /**
      * Create a user and assign roles to it.

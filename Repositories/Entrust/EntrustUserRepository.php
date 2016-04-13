@@ -55,6 +55,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
      *
      * @param array $data
      * @param array $roles
+     * @return EloquentUser
      */
     public function createWithRoles(array $data, $roles)
     {
@@ -63,6 +64,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
         if (!empty($roles)) {
             $user->roles()->attach($roles);
         }
+        return $user;
     }
 
     /**
