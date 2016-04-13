@@ -18,7 +18,7 @@ return [
             'description' => 'user::settings.profile.enable-profile.description',
             'type'        => 'boolean',
             'view'        => 'checkbox',
-            'default'     => false,
+            'default'     => true,
         ],
     ],
 ];
