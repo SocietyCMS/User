@@ -4,13 +4,15 @@ namespace Modules\User\Http\Controllers;
 
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\PublicBaseController;
 use Modules\User\Events\UserHasBegunResetProcess;
-use Modules\User\Exceptions\InvalidOrExpiredResetCode;
 use Modules\User\Exceptions\UserNotFoundException;
-use Modules\User\Http\Requests\LoginRequest;
 use Modules\User\Http\Requests\RegisterRequest;
 use Modules\User\Http\Requests\ResetCompleteRequest;
 use Modules\User\Http\Requests\ResetRequest;
@@ -52,10 +54,17 @@ class AuthController extends PublicBaseController
 
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getLogin()
+    public function getLogin(Request $request)
     {
+        if(App::environment('demo')) {
+            $request->session()->flashInput([
+                'email' => 'admin@societycms.com',
+                'password' => 'secret'
+            ]);
+        }
         return view('user::public.login');
     }
 
