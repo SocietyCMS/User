@@ -1,8 +1,10 @@
 {
   "name": "societycms/module-user",
   "description": "The SocietyCMS User module.",
-  "keywords": ["cms", "societycms"],
-  "license": "AGPL",
+  "keywords": [
+    "societycms"
+  ],
+  "license": "MIT",
   "version": "0.0.1",
   "type": "societycms-module",
   "authors": [
