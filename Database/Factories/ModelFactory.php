@@ -11,21 +11,22 @@
 */
 $factory->define(\Modules\User\Entities\Entrust\EloquentUser::class, function (Faker\Generator $faker) {
     $faker = \Faker\Factory::create('de_CH');
+
     return [
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'email' => $faker->email,
-        'title' => $faker->title,
-        'office' => $faker->company,
-        'bio' => $faker->paragraph,
-        'street' => $faker->streetAddress,
-        'city' => $faker->city,
-        'zip' => $faker->postcode,
-        'country' => $faker->country,
-        'phone' => $faker->phoneNumber,
-        'mobile' => $faker->phoneNumber,
-        'last_login' => $faker->dateTimeThisYear,
-        'password' => bcrypt(str_random(10)),
+        'first_name'     => $faker->firstName,
+        'last_name'      => $faker->lastName,
+        'email'          => $faker->email,
+        'title'          => $faker->title,
+        'office'         => $faker->company,
+        'bio'            => $faker->paragraph,
+        'street'         => $faker->streetAddress,
+        'city'           => $faker->city,
+        'zip'            => $faker->postcode,
+        'country'        => $faker->country,
+        'phone'          => $faker->phoneNumber,
+        'mobile'         => $faker->phoneNumber,
+        'last_login'     => $faker->dateTimeThisYear,
+        'password'       => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });

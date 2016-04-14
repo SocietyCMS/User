@@ -19,12 +19,10 @@ use Modules\User\Http\Requests\ResetRequest;
 use Modules\User\Repositories\UserRepository;
 
 /**
- * Class AuthController
- * @package Modules\User\Http\Controllers
+ * Class AuthController.
  */
 class AuthController extends PublicBaseController
 {
-
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
@@ -45,26 +43,26 @@ class AuthController extends PublicBaseController
     public function __construct(
         UserRepository $user,
         Authentication $auth
-    )
-    {
+    ) {
         $this->user = $user;
         $this->auth = $auth;
         $this->redirectPath = route(config('society.user.config.redirect_route_after_login'));
     }
 
-
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getLogin(Request $request)
     {
-        if(App::environment('demo')) {
+        if (App::environment('demo')) {
             $request->session()->flashInput([
-                'email' => 'admin@societycms.com',
-                'password' => 'secret'
+                'email'    => 'admin@societycms.com',
+                'password' => 'secret',
             ]);
         }
+
         return view('user::public.login');
     }
 
@@ -82,6 +80,7 @@ class AuthController extends PublicBaseController
 
     /**
      * @param RegisterRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postRegister(RegisterRequest $request)
@@ -110,6 +109,7 @@ class AuthController extends PublicBaseController
     /**
      * @param $userId
      * @param $code
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function getActivate($userId, $code)
@@ -134,13 +134,14 @@ class AuthController extends PublicBaseController
 
     /**
      * @param ResetRequest $request
-     * @return $this|\Illuminate\Http\RedirectResponse
+     *
      * @throws UserNotFoundException
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function postReset(ResetRequest $request)
     {
-
-        $user = $this->user->findByCredentials(['email' =>$request->email]);
+        $user = $this->user->findByCredentials(['email' => $request->email]);
 
         if (!$user) {
             Flash::error(trans('user::messages.no user found'));
@@ -169,11 +170,11 @@ class AuthController extends PublicBaseController
      * @param                      $userId
      * @param                      $code
      * @param ResetCompleteRequest $request
+     *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function postResetComplete($userId, $code, ResetCompleteRequest $request)
     {
-
         $this->input = $request->all();
 
         $user = $this->user->find($userId);
@@ -184,7 +185,6 @@ class AuthController extends PublicBaseController
             return redirect()->back()->withInput();
         }
 
-
         if (!$this->auth->completeResetPassword($user, $code, $request->password)) {
             Flash::error(trans('user::messages.invalid reset code'));
 
@@ -194,6 +194,5 @@ class AuthController extends PublicBaseController
         Flash::success(trans('user::messages.password reset'));
 
         return redirect()->route('login');
-
     }
 }

@@ -9,7 +9,7 @@ use Modules\User\Repositories\RoleRepository;
 class EntrustRoleRepository extends EloquentBaseRepository implements RoleRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -21,13 +21,13 @@ class EntrustRoleRepository extends EloquentBaseRepository implements RoleReposi
     /**
      * create name before creating a new role instance.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return EloquentRole
      */
     public function create(array $data)
     {
-        if(!array_key_exists('name',$data))
-        {
+        if (!array_key_exists('name', $data)) {
             $data['name'] = Str::slug($data['display_name']);
         }
 
@@ -57,12 +57,11 @@ class EntrustRoleRepository extends EloquentBaseRepository implements RoleReposi
      */
     public function updateWithUsers(array $data, $users, $id)
     {
-        $role = $this->update((array) $data,$id);
+        $role = $this->update((array) $data, $id);
 
         if (!empty($users)) {
             $role->users()->sync($users);
-        }
-        else {
+        } else {
             $role->users()->detach();
         }
     }

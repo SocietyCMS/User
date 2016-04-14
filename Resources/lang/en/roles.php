@@ -22,7 +22,7 @@ return [
         'permissions' => 'Permissions',
     ],
     'form' => [
-        'name' => 'Name',
+        'name'        => 'Name',
         'description' => 'Description',
     ],
     'navigation' => [

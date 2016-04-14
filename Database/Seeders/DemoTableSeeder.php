@@ -3,16 +3,17 @@
 namespace Modules\User\Database\Seeders;
 
 use Carbon\Carbon;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Core\Traits\Factory\useFactories;
-use Modules\User\Entities\Entrust\EloquentUser;
 use Modules\User\Entities\Entrust\EloquentRole;
+use Modules\User\Entities\Entrust\EloquentUser;
 
 class DemoTableSeeder extends Seeder
 {
     use useFactories;
+
     /**
      * Run the database seeds.
      *
@@ -41,30 +42,30 @@ class DemoTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
         $adminUserInfo = [
             'first_name' => 'SocietyCMS',
-            'last_name' => 'Administrator',
-            'email' => 'admin@societycms.com',
-            'password' => bcrypt('secret'),
+            'last_name'  => 'Administrator',
+            'email'      => 'admin@societycms.com',
+            'password'   => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'title' => $faker->title,
-            'office' => $faker->company,
-            'bio' => $faker->paragraph,
-            'street' => $faker->streetAddress,
-            'city' => $faker->city,
-            'zip' => $faker->postcode,
-            'country' => $faker->country,
-            'phone' => $faker->phoneNumber,
-            'mobile' => $faker->phoneNumber,
+            'title'      => $faker->title,
+            'office'     => $faker->company,
+            'bio'        => $faker->paragraph,
+            'street'     => $faker->streetAddress,
+            'city'       => $faker->city,
+            'zip'        => $faker->postcode,
+            'country'    => $faker->country,
+            'phone'      => $faker->phoneNumber,
+            'mobile'     => $faker->phoneNumber,
             'last_login' => $faker->dateTimeThisYear,
         ];
-        
+
         $adminRoleInfo = [
-            'name' => 'admin',
+            'name'         => 'admin',
             'display_name' => 'Site Administrator',
-            'description' => 'User is allowed to manage the full site',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'description'  => 'User is allowed to manage the full site',
+            'created_at'   => Carbon::now(),
+            'updated_at'   => Carbon::now(),
         ];
 
         $adminUser = (new EloquentUser())->create($adminUserInfo);
@@ -77,30 +78,30 @@ class DemoTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
         $demoUserInfo = [
             'first_name' => 'Demo',
-            'last_name' => 'User',
-            'email' => 'demo@societycms.com',
-            'password' => bcrypt('secret'),
+            'last_name'  => 'User',
+            'email'      => 'demo@societycms.com',
+            'password'   => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'title' => $faker->title,
-            'office' => $faker->company,
-            'bio' => $faker->paragraph,
-            'street' => $faker->streetAddress,
-            'city' => $faker->city,
-            'zip' => $faker->postcode,
-            'country' => $faker->country,
-            'phone' => $faker->phoneNumber,
-            'mobile' => $faker->phoneNumber,
+            'title'      => $faker->title,
+            'office'     => $faker->company,
+            'bio'        => $faker->paragraph,
+            'street'     => $faker->streetAddress,
+            'city'       => $faker->city,
+            'zip'        => $faker->postcode,
+            'country'    => $faker->country,
+            'phone'      => $faker->phoneNumber,
+            'mobile'     => $faker->phoneNumber,
             'last_login' => $faker->dateTimeThisYear,
         ];
 
         $demoRoleInfo = [
-            'name' => 'demo',
+            'name'         => 'demo',
             'display_name' => 'User Group',
-            'description' => 'Unprivileged User',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'description'  => 'Unprivileged User',
+            'created_at'   => Carbon::now(),
+            'updated_at'   => Carbon::now(),
         ];
 
         $demoUser = (new EloquentUser())->create($demoUserInfo);

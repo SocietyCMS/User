@@ -9,7 +9,6 @@ use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\ResetRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
-use Modules\User\Repositories\Entrust\Criteria\RoleOrderCriteria;
 use Modules\User\Repositories\Entrust\Criteria\UserOrderCriteria;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
@@ -106,7 +105,7 @@ class UserController extends AdminBaseController
      */
     public function update($id, UpdateUserRequest $request)
     {
-        $this->user->updatewithRoles($request->all(),$request->roles, $id);
+        $this->user->updatewithRoles($request->all(), $request->roles, $id);
 
         flash(trans('user::messages.user updated'));
 
@@ -115,13 +114,16 @@ class UserController extends AdminBaseController
 
     /**
      * @param ResetRequest $request
-     * @return $this|\Illuminate\Http\RedirectResponse
+     *
      * @throws UserNotFoundException
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function passwordResetRequest($id)
     {
         if (!$user = $this->user->find($id)) {
             flash()->error(trans('user::messages.user not found'));
+
             return redirect()->route('backend::user.index');
         }
 

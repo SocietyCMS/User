@@ -33,7 +33,7 @@ class SendRegistrationConfirmationEmail
 
         Mail::queue('user::emails.welcome', $data,
             function (Message $message) use ($user) {
-                $message->from(Setting::get('core::mail-from'),Setting::get('core::site-name'));
+                $message->from(Setting::get('core::mail-from'), Setting::get('core::site-name'));
                 $message->to($user->email)->subject('Welcome.');
             }
         );

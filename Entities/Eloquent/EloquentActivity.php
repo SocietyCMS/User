@@ -5,8 +5,7 @@ namespace Modules\User\Entities\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EloquentActivity
- * @package Modules\User\Entities\Eloquent
+ * Class EloquentActivity.
  */
 class EloquentActivity extends Model
 {
@@ -34,7 +33,7 @@ class EloquentActivity extends Model
      */
     public function user()
     {
-        return $this->belongsTo("Modules\\User\\Entities\\Entrust\\EloquentUser", 'user_id');
+        return $this->belongsTo('Modules\\User\\Entities\\Entrust\\EloquentUser', 'user_id');
     }
 
     /**

@@ -26,13 +26,12 @@ class UserProfileMiddleware
      */
     public function handle($request, \Closure $next)
     {
-
-        if(\Setting::get('user::enable-profile') )
-        {
+        if (\Setting::get('user::enable-profile')) {
             return $next($request);
         }
 
         \Flash::error(trans('user::messages.profile disabled'));
+
         return \Redirect::route('dashboard.index');
     }
 }

@@ -7,12 +7,11 @@ use Modules\Core\Contracts\Authentication;
 
 class EntrustAuthentication implements Authentication
 {
-
     /**
      * Authenticate a user.
      *
      * @param array $credentials
-     * @param bool  $remember Remember the user
+     * @param bool  $remember    Remember the user
      *
      * @return mixed
      */
@@ -45,7 +44,6 @@ class EntrustAuthentication implements Authentication
     {
         // TODO: Implement activate() method.
     }
-
 
     /**
      * Log the user out of the application.
@@ -107,6 +105,7 @@ class EntrustAuthentication implements Authentication
         if (!$user = $this->check()) {
             return false;
         }
+
         return $user->hasRole($role);
     }
 
@@ -122,6 +121,7 @@ class EntrustAuthentication implements Authentication
         if (!$user = $this->check()) {
             return false;
         }
+
         return $user->can($permission);
     }
 
@@ -132,10 +132,10 @@ class EntrustAuthentication implements Authentication
      */
     public function check()
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             return Auth::user();
         }
+
         return false;
     }
 
@@ -153,6 +153,7 @@ class EntrustAuthentication implements Authentication
      * Handle an authentication attempt.
      *
      * @param $credentials
+     *
      * @return mixed
      */
     public function attempt($credentials)

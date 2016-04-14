@@ -41,5 +41,4 @@ class UpdateUserRequest extends FormRequest
 
         $this->replace($input);
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Providers;
+<?php
+
+namespace Modules\User\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -33,7 +35,8 @@ class EventServiceProvider extends ServiceProvider
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param \Illuminate\Contracts\Events\Dispatcher $events
+     *
      * @return void
      */
     public function boot(Dispatcher $events)
@@ -51,10 +54,9 @@ class EventServiceProvider extends ServiceProvider
         });
 */
 
-        $events->listen('auth.login', function($user) {
+        $events->listen('auth.login', function ($user) {
             $user->last_login = Carbon::now();
             $user->save();
         });
-
     }
 }

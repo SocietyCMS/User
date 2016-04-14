@@ -3,7 +3,6 @@
 namespace Modules\User\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Modules\Core\Contracts\Authentication;
 
 class UpdateProfilePasswordRequest extends FormRequest
 {

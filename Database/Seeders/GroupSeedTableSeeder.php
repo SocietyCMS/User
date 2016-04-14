@@ -2,8 +2,8 @@
 
 namespace Modules\User\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\User\Database\Seeders\Tables\AdminRole;
 
@@ -27,6 +27,5 @@ class GroupSeedTableSeeder extends Seeder
         DB::table('user__permission_role')->delete();
 
         return $this->call(AdminRole::class);
-
     }
 }

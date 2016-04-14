@@ -10,6 +10,7 @@ use Modules\Core\Traits\Factory\useFactories;
 class User extends Seeder
 {
     use useFactories;
+
     /**
      * Run the database seeds.
      *
@@ -23,26 +24,25 @@ class User extends Seeder
 
         $adminUser = [
             'first_name' => 'SocietyCMS',
-            'last_name' => 'Administrator',
-            'email' => 'admin@societycms.com',
-            'password' => bcrypt('secret'),
+            'last_name'  => 'Administrator',
+            'email'      => 'admin@societycms.com',
+            'password'   => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'title' => $faker->title,
-            'office' => $faker->company,
-            'bio' => $faker->paragraph,
-            'street' => $faker->streetAddress,
-            'city' => $faker->city,
-            'zip' => $faker->postcode,
-            'country' => $faker->country,
-            'phone' => $faker->phoneNumber,
-            'mobile' => $faker->phoneNumber,
+            'title'      => $faker->title,
+            'office'     => $faker->company,
+            'bio'        => $faker->paragraph,
+            'street'     => $faker->streetAddress,
+            'city'       => $faker->city,
+            'zip'        => $faker->postcode,
+            'country'    => $faker->country,
+            'phone'      => $faker->phoneNumber,
+            'mobile'     => $faker->phoneNumber,
             'last_login' => $faker->dateTimeThisYear,
         ];
         DB::table('user__users')->insert($adminUser);
 
         $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create();
     }
-
 }

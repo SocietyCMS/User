@@ -3,7 +3,6 @@
 namespace Modules\User\Database\Seeders\Tables;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Permission extends Seeder
@@ -16,8 +15,8 @@ class Permission extends Seeder
     public function run()
     {
         DB::table('user__users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@societycms.com',
+            'name'     => 'admin',
+            'email'    => 'admin@societycms.com',
             'password' => bcrypt('secret'),
         ]);
     }

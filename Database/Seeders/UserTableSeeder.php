@@ -2,10 +2,8 @@
 
 namespace Modules\User\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\User\Database\Seeders\Tables\Role;
-use Modules\User\Database\Seeders\Tables\User;
+use Illuminate\Database\Seeder;
 
 class UserTableSeeder extends Seeder
 {

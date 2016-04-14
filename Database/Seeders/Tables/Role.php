@@ -19,11 +19,11 @@ class Role extends Seeder
         DB::table('user__roles')->delete();
 
         $admin = DB::table('user__roles')->insertGetId([
-            'name' => 'admin',
+            'name'         => 'admin',
             'display_name' => 'Site Administrator',
-            'description' => 'User is allowed to manage the full site',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'description'  => 'User is allowed to manage the full site',
+            'created_at'   => Carbon::now(),
+            'updated_at'   => Carbon::now(),
 
         ]);
 
@@ -32,11 +32,11 @@ class Role extends Seeder
         $user->roles()->attach($admin);
 
         DB::table('user__roles')->insert([
-            'name' => 'owner',
+            'name'         => 'owner',
             'display_name' => 'Project Owner',
-            'description' => 'User is the owner of a given project',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'description'  => 'User is the owner of a given project',
+            'created_at'   => Carbon::now(),
+            'updated_at'   => Carbon::now(),
         ]);
     }
 }

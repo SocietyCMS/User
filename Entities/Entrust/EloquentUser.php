@@ -1,16 +1,17 @@
 <?php
+
 namespace Modules\User\Entities\Entrust;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
-use Laracasts\Presenter\PresentableTrait;
 
 class EloquentUser extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasMediaConversions
 {
@@ -18,9 +19,9 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use CanResetPassword;
     use PresentableTrait;
 
-    use HasMediaTrait{ delete as mediaDelete;}
+    use HasMediaTrait{ delete as mediaDelete; }
 
-    use EntrustUserTrait { can as entrustCan; delete as entrustDelete;}
+    use EntrustUserTrait { can as entrustCan; delete as entrustDelete; }
 
     /**
      * The database table used by the model.
@@ -63,7 +64,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     protected $presenter = 'Modules\User\Presenters\UserPresenter';
 
     /**
-     * Returns the activity relationship
+     * Returns the activity relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
@@ -71,7 +72,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     {
         return $this->hasMany('Modules\User\Entities\Eloquent\EloquentActivity');
     }
-
 
     public function isActivated()
     {
@@ -95,7 +95,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         $this->addMediaConversion('original400')
             ->setManipulations(['w' => 400, 'h' => 400, 'fit' => 'max'])
             ->performOnCollections('profile');
-
     }
 
     /**
@@ -109,9 +108,10 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function can($permission, $requireAll = false)
     {
-        if($this->cachedRoles()->where('name', 'admin')->count()){
+        if ($this->cachedRoles()->where('name', 'admin')->count()) {
             return true;
         }
+
         return $this->entrustCan($permission, $requireAll = false);
     }
 
@@ -125,7 +125,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     {
         $this->mediaDelete();
         $this->entrustDelete();
+
         return true;
     }
-
 }

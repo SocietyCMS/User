@@ -3,8 +3,8 @@
 namespace Modules\User\Traits\Activity;
 
 use Carbon\Carbon;
-use Modules\User\Entities\Eloquent\EloquentActivity as Activity;
 use Modules\User\Entities\Eloquent\EloquentActivity;
+use Modules\User\Entities\Eloquent\EloquentActivity as Activity;
 
 /**
  * Class RecordsActivity.
@@ -44,7 +44,6 @@ trait RecordsActivity
         if ($recentSimilar == 0) {
             Activity::create($mapping);
         }
-
     }
 
     /**

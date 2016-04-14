@@ -6,5 +6,4 @@ use Zizaco\Entrust\Middleware\EntrustAbility;
 
 class Ability extends EntrustAbility
 {
-
 }
