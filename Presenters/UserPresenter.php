@@ -6,10 +6,8 @@ use Carbon\Carbon;
 use Laracasts\Presenter\Presenter;
 use Laravolt\Avatar\Facade as Avatar;
 
-
 /**
- * Class UserPresenter
- * @package Modules\User\Presenters
+ * Class UserPresenter.
  */
 class UserPresenter extends Presenter
 {
@@ -18,7 +16,7 @@ class UserPresenter extends Presenter
      */
     public function fullname()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     /**
@@ -35,8 +33,9 @@ class UserPresenter extends Presenter
     public function createdAt()
     {
         if (!$this->created_at || $this->created_at == '0000-00-00 00:00:00') {
-            return null;
+            return;
         }
+
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)
             ->formatLocalized('%d %b. %Y');
     }
@@ -47,8 +46,9 @@ class UserPresenter extends Presenter
     public function updatedAt()
     {
         if (!$this->updated_at || $this->updated_at == '0000-00-00 00:00:00') {
-            return null;
+            return;
         }
+
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)
             ->formatLocalized('%d %b. %Y');
     }
@@ -59,10 +59,10 @@ class UserPresenter extends Presenter
     public function lastLogin()
     {
         if (!$this->last_login || $this->last_login == '0000-00-00 00:00:00') {
-            return null;
+            return;
         }
+
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->last_login)
                 ->diffForHumans();
-
     }
 }

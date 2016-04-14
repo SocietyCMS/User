@@ -64,16 +64,16 @@ class UserServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
-            "Modules\\User\\Repositories\\Entrust\\EntrustUserRepository"
+            'Modules\\User\\Repositories\\Entrust\\EntrustUserRepository'
         );
 
         $this->app->bind(
             'Modules\User\Repositories\RoleRepository',
-            "Modules\\User\\Repositories\\Entrust\\EntrustRoleRepository"
+            'Modules\\User\\Repositories\\Entrust\\EntrustRoleRepository'
         );
         $this->app->bind(
             'Modules\Core\Contracts\Authentication',
-            "Modules\\User\\Repositories\\Entrust\\EntrustAuthentication"
+            'Modules\\User\\Repositories\\Entrust\\EntrustAuthentication'
         );
     }
 

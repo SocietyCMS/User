@@ -9,7 +9,6 @@ use Modules\Core\Repositories\BaseRepository;
  */
 interface UserRepository extends BaseRepository
 {
-
     /**
      * Create a user and assign roles to it.
      *

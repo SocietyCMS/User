@@ -6,5 +6,4 @@ use Zizaco\Entrust\Middleware\EntrustRole;
 
 class Role extends EntrustRole
 {
-
 }

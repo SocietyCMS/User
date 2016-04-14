@@ -49,6 +49,7 @@ class UserController extends ApiBaseController
     public function index()
     {
         $users = $this->user->all();
+
         return $this->response->collection($users, new UserTransformer());
     }
 

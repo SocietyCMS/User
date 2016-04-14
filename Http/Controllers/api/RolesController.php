@@ -55,7 +55,7 @@ class RolesController extends ApiBaseController
     {
         $data = $this->mergeRequestWithPermissions($request);
 
-        if($this->role->create($data)) {
+        if ($this->role->create($data)) {
             flash(trans('user::messages.role created'));
         }
 

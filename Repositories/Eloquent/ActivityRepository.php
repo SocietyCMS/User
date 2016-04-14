@@ -2,7 +2,6 @@
 
 namespace Modules\User\Repositories\Eloquent;
 
-use Carbon\Carbon;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class ActivityRepository extends EloquentBaseRepository

@@ -5,12 +5,9 @@ namespace Modules\User\Http\Controllers\api;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\ApiBaseController;
 use Modules\Core\Http\Requests\MediaImageRequest;
-use Modules\User\Http\Requests\CreateUserRequest;
-use Modules\User\Http\Requests\UpdateUserRequest;
 use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
 use Modules\User\Transformers\ProfilePictureTransformer;
-use Modules\User\Transformers\UserTransformer;
 
 class ProfileController extends ApiBaseController
 {
@@ -52,7 +49,7 @@ class ProfileController extends ApiBaseController
      */
     public function store(MediaImageRequest $request, $id)
     {
-        if($this->auth->user()->hasRole('admin')){
+        if ($this->auth->user()->hasRole('admin')) {
             $user = $this->user->find($id);
         } else {
             $user = $this->auth->user();

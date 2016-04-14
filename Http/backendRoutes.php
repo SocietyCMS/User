@@ -13,7 +13,6 @@ $router->group(['prefix' => '/user'], function ($router) {
         delete('users/{users}', ['as' => 'backend::user.user.destroy', 'uses' => 'UserController@destroy']);
     });
 
-
     // Roles
     $router->group(['middleware' => ['permission:user::manage-role']], function () {
         get('roles', ['as' => 'backend::user.role.index', 'uses' => 'RolesController@index']);
@@ -24,14 +23,13 @@ $router->group(['prefix' => '/user'], function ($router) {
         delete('roles/{roles}', ['as' => 'backend::user.role.destroy', 'uses' => 'RolesController@destroy']);
     });
 
-
     //Profile
     get('profile/', ['as' => 'backend::user.profile.show', 'uses' => 'ProfileController@currentUser']);
 
     put('profile/user',
         ['as' => 'backend::user.profile.update.user', 'uses' => 'ProfileController@updateUser']);
     put('profile/contact',
-        ['middleware' => ['permission:user::change-own-contact-info'],'as' => 'backend::user.profile.update.contact', 'uses' => 'ProfileController@updateContact']);
+        ['middleware' => ['permission:user::change-own-contact-info'], 'as' => 'backend::user.profile.update.contact', 'uses' => 'ProfileController@updateContact']);
     put('profile/password',
-        ['middleware' => ['permission:user::change-own-password'],'as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
+        ['middleware' => ['permission:user::change-own-password'], 'as' => 'backend::user.profile.update.password', 'uses' => 'ProfileController@updatePassword']);
 });

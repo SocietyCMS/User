@@ -1,15 +1,15 @@
 <?php
+
 namespace Modules\User\Entities\Entrust;
 
-use Zizaco\Entrust\Contracts\EntrustRoleInterface;
-use Zizaco\Entrust\Traits\EntrustRoleTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
-use Illuminate\Support\Facades\Config;
+use Zizaco\Entrust\Contracts\EntrustRoleInterface;
+use Zizaco\Entrust\Traits\EntrustRoleTrait;
 
 class EloquentRole extends Model implements EntrustRoleInterface
 {
-    use EntrustRoleTrait { hasPermission as entrustHasPermission;}
+    use EntrustRoleTrait { hasPermission as entrustHasPermission; }
     use PresentableTrait;
 
     /**
@@ -47,10 +47,10 @@ class EloquentRole extends Model implements EntrustRoleInterface
      */
     public function hasPermission($name, $requireAll = false)
     {
-        if($this->name == 'admin')
-        {
+        if ($this->name == 'admin') {
             return true;
         }
+
         return $this->entrustHasPermission($name, $requireAll);
     }
 }

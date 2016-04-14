@@ -6,5 +6,4 @@ use Zizaco\Entrust\Middleware\EntrustPermission;
 
 class Permission extends EntrustPermission
 {
-
 }

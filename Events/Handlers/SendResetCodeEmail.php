@@ -15,7 +15,7 @@ class SendResetCodeEmail
         $code = $event->code;
 
         Mail::queue('user::emails.reminder', compact('user', 'code'), function (Message $message) use ($user) {
-            $message->from(Setting::get('core::mail-from'),Setting::get('core::site-name'));
+            $message->from(Setting::get('core::mail-from'), Setting::get('core::site-name'));
             $message->to($user->email)->subject('Reset your account password.');
         });
     }

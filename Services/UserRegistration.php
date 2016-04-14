@@ -7,8 +7,7 @@ use Modules\User\Events\UserHasRegistered;
 use Modules\User\Repositories\RoleRepository;
 
 /**
- * Class UserRegistration
- * @package Modules\User\Services
+ * Class UserRegistration.
  */
 class UserRegistration
 {
@@ -27,6 +26,7 @@ class UserRegistration
 
     /**
      * UserRegistration constructor.
+     *
      * @param Authentication $auth
      * @param RoleRepository $role
      */
@@ -59,9 +59,8 @@ class UserRegistration
      */
     private function createUser()
     {
-        return $this->auth->register((array)$this->input);
+        return $this->auth->register((array) $this->input);
     }
-
 
     /**
      * @param $user

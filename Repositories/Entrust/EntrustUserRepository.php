@@ -2,14 +2,13 @@
 
 namespace Modules\User\Repositories\Entrust;
 
-
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 use Modules\User\Repositories\UserRepository;
 
 class EntrustUserRepository extends EloquentBaseRepository implements UserRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -21,13 +20,13 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     /**
      * Encrypt password before creating a new user instance.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return EloquentUser
      */
     public function create(array $data)
     {
-        if(array_key_exists('password',$data))
-        {
+        if (array_key_exists('password', $data)) {
             $data['password'] = bcrypt($data['password']);
         }
 
@@ -37,13 +36,13 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     /**
      * Encrypt password before updating a user instance.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return EloquentUser
      */
     public function update(array $data, $id)
     {
-        if(array_key_exists('password',$data))
-        {
+        if (array_key_exists('password', $data)) {
             $data['password'] = bcrypt($data['password']);
         }
 
@@ -55,6 +54,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
      *
      * @param array $data
      * @param array $roles
+     *
      * @return EloquentUser
      */
     public function createWithRoles(array $data, $roles)
@@ -64,6 +64,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
         if (!empty($roles)) {
             $user->roles()->attach($roles);
         }
+
         return $user;
     }
 

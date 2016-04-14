@@ -2,11 +2,9 @@
 
 namespace Modules\User\Http\Controllers\backend;
 
-use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\AdminBaseController;
-use Modules\User\Http\Requests\EditProfileRequest;
 use Modules\User\Http\Requests\UpdateProfileContactRequest;
 use Modules\User\Http\Requests\UpdateProfilePasswordRequest;
 use Modules\User\Http\Requests\UpdateProfileUserRequest;
@@ -15,8 +13,7 @@ use Modules\User\Repositories\RoleRepository;
 use Modules\User\Repositories\UserRepository;
 
 /**
- * Class ProfileController
- * @package Modules\User\Http\Controllers\backend
+ * Class ProfileController.
  */
 class ProfileController extends AdminBaseController
 {
@@ -37,8 +34,7 @@ class ProfileController extends AdminBaseController
     public function __construct(
         UserRepository $user,
         RoleRepository $role
-    )
-    {
+    ) {
         parent::__construct();
         $this->user = $user;
         $this->role = $role;
@@ -56,28 +52,27 @@ class ProfileController extends AdminBaseController
         return view('user::backend.profile.edit', compact('user'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param UpdateProfileUserRequest $request
+     *
      * @return Response
+     *
      * @internal param int $id
      */
     public function updateUser(UpdateProfileUserRequest $request)
     {
         $input = [];
 
-        if($this->auth->user()->can('user::change-own-name'))
-        {
+        if ($this->auth->user()->can('user::change-own-name')) {
             $input = array_merge($input, [
                 'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
+                'last_name'  => $request->last_name,
             ]);
         }
 
-        if($this->auth->user()->can('user::change-own-email'))
-        {
+        if ($this->auth->user()->can('user::change-own-email')) {
             $input = array_merge($input, [
                 'email' => $request->email,
             ]);
@@ -94,7 +89,9 @@ class ProfileController extends AdminBaseController
      * Update the specified resource in storage.
      *
      * @param UpdateProfileContactRequest $request
+     *
      * @return Response
+     *
      * @internal param int $id
      */
     public function updateContact(UpdateProfileContactRequest $request)
@@ -110,12 +107,13 @@ class ProfileController extends AdminBaseController
      * Update the password of the given user.
      *
      * @param UpdateProfilePasswordRequest|UpdateUserRequest $request
+     *
      * @return Response
+     *
      * @internal param int $id
      */
     public function updatePassword(UpdateProfilePasswordRequest $request)
     {
-
         $user = $this->user->find($this->auth->id());
 
         $credentials = [

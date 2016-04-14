@@ -19,7 +19,6 @@ class RegisterMiddleware
     {
         if (Setting::get('core::enable-registration')) {
             return $next($request);
-
         }
 
         return Redirect::route(config('society.user.config.redirect_route_after_login'));

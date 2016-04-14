@@ -8,7 +8,6 @@ class LoginTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions, MigrateSocietyCMSDemo;
 
-
     /**
      * A basic functional test example.
      *
