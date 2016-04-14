@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Modules\Core\Traits\Testing\DatabaseMigrations;
-use Modules\Modules\Manager\ModuleManager;
+use Modules\Core\Traits\Testing\MigrateSocietyCMSDemo;
 
 class LoginTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
+    use DatabaseMigrations, DatabaseTransactions, MigrateSocietyCMSDemo;
 
 
     /**
@@ -18,11 +17,11 @@ class LoginTest extends TestCase
     public function tests_if_user_can_login()
     {
         $this->visit('/')
-            ->see('Sign in')
-            ->click('Sign in')
+            ->see('Login')
+            ->click('Login')
 
             ->type('admin@societycms.com', 'email')
-            ->type('test', 'password')
+            ->type('secret', 'password')
             ->press('Sign in')
 
             ->seePageIs('/backend')
