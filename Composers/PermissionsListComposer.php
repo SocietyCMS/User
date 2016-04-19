@@ -18,6 +18,6 @@ class PermissionsListComposer
 
     public function compose($view)
     {
-        $view->permissions = $this->permissions->managed();
+        $view->permissions = $this->permissions->allManagedPermissions();
     }
 }
