@@ -14,7 +14,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
      */
     public function model()
     {
-        return 'Modules\User\Entities\Entrust\EloquentUSer';
+        return 'Modules\User\Entities\Entrust\EloquentUser';
     }
 
     /**
