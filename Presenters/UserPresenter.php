@@ -32,7 +32,7 @@ class UserPresenter extends Presenter
      */
     public function createdAt()
     {
-        if (!$this->created_at || $this->created_at == '0000-00-00 00:00:00') {
+        if (! $this->created_at || $this->created_at == '0000-00-00 00:00:00') {
             return;
         }
 
@@ -45,7 +45,7 @@ class UserPresenter extends Presenter
      */
     public function updatedAt()
     {
-        if (!$this->updated_at || $this->updated_at == '0000-00-00 00:00:00') {
+        if (! $this->updated_at || $this->updated_at == '0000-00-00 00:00:00') {
             return;
         }
 
@@ -58,7 +58,7 @@ class UserPresenter extends Presenter
      */
     public function lastLogin()
     {
-        if (!$this->last_login || $this->last_login == '0000-00-00 00:00:00') {
+        if (! $this->last_login || $this->last_login == '0000-00-00 00:00:00') {
             return;
         }
 

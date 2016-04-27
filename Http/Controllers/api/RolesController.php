@@ -71,7 +71,7 @@ class RolesController extends ApiBaseController
      */
     public function edit($id)
     {
-        if (!$role = $this->role->find($id)) {
+        if (! $role = $this->role->find($id)) {
             flash()->error(trans('user::messages.role not found'));
 
             return redirect()->route('backend::user.role.index');
