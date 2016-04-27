@@ -27,7 +27,7 @@ class EntrustRoleRepository extends EloquentBaseRepository implements RoleReposi
      */
     public function create(array $data)
     {
-        if (!array_key_exists('name', $data)) {
+        if (! array_key_exists('name', $data)) {
             $data['name'] = Str::slug($data['display_name']);
         }
 
@@ -44,7 +44,7 @@ class EntrustRoleRepository extends EloquentBaseRepository implements RoleReposi
     {
         $role = $this->create((array) $data);
 
-        if (!empty($users)) {
+        if (! empty($users)) {
             $role->users()->attach($users);
         }
     }
@@ -59,7 +59,7 @@ class EntrustRoleRepository extends EloquentBaseRepository implements RoleReposi
     {
         $role = $this->update((array) $data, $id);
 
-        if (!empty($users)) {
+        if (! empty($users)) {
             $role->users()->sync($users);
         } else {
             $role->users()->detach();

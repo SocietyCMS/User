@@ -86,7 +86,7 @@ class UserController extends AdminBaseController
      */
     public function edit($id)
     {
-        if (!$user = $this->user->find($id)) {
+        if (! $user = $this->user->find($id)) {
             flash()->error(trans('user::messages.user not found'));
 
             return redirect()->route('backend::user.index');
@@ -121,7 +121,7 @@ class UserController extends AdminBaseController
      */
     public function passwordResetRequest($id)
     {
-        if (!$user = $this->user->find($id)) {
+        if (! $user = $this->user->find($id)) {
             flash()->error(trans('user::messages.user not found'));
 
             return redirect()->route('backend::user.index');

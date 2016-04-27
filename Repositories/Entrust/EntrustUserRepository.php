@@ -61,7 +61,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     {
         $user = $this->create((array) $data);
 
-        if (!empty($roles)) {
+        if (! empty($roles)) {
             $user->roles()->attach($roles);
         }
 
@@ -78,7 +78,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     {
         $user = $this->update((array) $data, $id);
 
-        if (!empty($roles)) {
+        if (! empty($roles)) {
             $user->roles()->sync($roles);
         } else {
             $user->roles()->detach();

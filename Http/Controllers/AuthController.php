@@ -71,7 +71,7 @@ class AuthController extends PublicBaseController
      */
     public function getRegister()
     {
-        if (!\Setting::get('user::enable-registration')) {
+        if (! \Setting::get('user::enable-registration')) {
             return redirect()->route('login');
         }
 
@@ -85,7 +85,7 @@ class AuthController extends PublicBaseController
      */
     public function postRegister(RegisterRequest $request)
     {
-        if (!\Setting::get('user::enable-registration')) {
+        if (! \Setting::get('user::enable-registration')) {
             return redirect()->route('login');
         }
 
@@ -143,7 +143,7 @@ class AuthController extends PublicBaseController
     {
         $user = $this->user->findByCredentials(['email' => $request->email]);
 
-        if (!$user) {
+        if (! $user) {
             Flash::error(trans('user::messages.no user found'));
 
             return redirect()->back()->withInput();
@@ -179,13 +179,13 @@ class AuthController extends PublicBaseController
 
         $user = $this->user->find($userId);
 
-        if (!$user) {
+        if (! $user) {
             Flash::error(trans('user::messages.user no longer exists'));
 
             return redirect()->back()->withInput();
         }
 
-        if (!$this->auth->completeResetPassword($user, $code, $request->password)) {
+        if (! $this->auth->completeResetPassword($user, $code, $request->password)) {
             Flash::error(trans('user::messages.invalid reset code'));
 
             return redirect()->back()->withInput();

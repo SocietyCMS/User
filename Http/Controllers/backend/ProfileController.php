@@ -122,7 +122,7 @@ class ProfileController extends AdminBaseController
             'password' => $request->old_password,
         ];
 
-        if (!$this->auth->attempt($credentials)) {
+        if (! $this->auth->attempt($credentials)) {
             Flash::error(trans('user::messages.invalid old password'));
 
             return redirect()->back();

@@ -102,7 +102,7 @@ class EntrustAuthentication implements Authentication
      */
     public function hasRole($role)
     {
-        if (!$user = $this->check()) {
+        if (! $user = $this->check()) {
             return false;
         }
 
@@ -118,7 +118,7 @@ class EntrustAuthentication implements Authentication
      */
     public function can($permission)
     {
-        if (!$user = $this->check()) {
+        if (! $user = $this->check()) {
             return false;
         }
 
@@ -168,7 +168,7 @@ class EntrustAuthentication implements Authentication
      */
     public function id()
     {
-        if (!$user = $this->check()) {
+        if (! $user = $this->check()) {
             return;
         }
 
