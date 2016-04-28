@@ -5,7 +5,7 @@
         <thead>
         <tr>
             <th></th>
-            <th>Permission</th>
+            <th>{{ trans('user::roles.tabs.permission') }}</th>
         </tr>
         </thead>
         <tbody>
