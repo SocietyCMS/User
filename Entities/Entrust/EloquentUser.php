@@ -70,7 +70,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function activity()
     {
-        return $this->hasMany('Modules\User\Entities\Eloquent\EloquentActivity');
+        return $this->hasMany('Modules\Core\Entities\Eloquent\Activity');
     }
 
     public function isActivated()

@@ -3,8 +3,7 @@
 namespace Modules\User\Traits\Activity;
 
 use Carbon\Carbon;
-use Modules\User\Entities\Eloquent\EloquentActivity;
-use Modules\User\Entities\Eloquent\EloquentActivity as Activity;
+use Modules\Core\Entities\Activity;
 
 /**
  * Class RecordsActivity.
@@ -24,7 +23,6 @@ trait RecordsActivity
     }
 
     /**
-     * @param $model
      * @param $event
      */
     public function recordActivity($event)
@@ -92,6 +90,6 @@ trait RecordsActivity
      */
     public function activities()
     {
-        return $this->morphMany(EloquentActivity::class, 'subject');
+        return $this->morphMany(Activity::class, 'subject');
     }
 }
