@@ -21,7 +21,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use PresentableTrait;
     use RecordsActivity;
 
-
     use HasMediaTrait{ delete as mediaDelete; }
 
     use EntrustUserTrait { can as entrustCan; delete as entrustDelete; }
@@ -80,7 +79,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      * @var array
      */
     protected static $recordEvents = ['created'];
-    
+
     /**
      * Views for the Dashboard timeline.
      *
