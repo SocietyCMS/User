@@ -72,7 +72,7 @@ class UserController extends AdminBaseController
     {
         $this->user->createWithRoles($request->all(), $request->roles);
 
-        flash(trans('core::messages.resource.resource created',['name' => trans('user::users.title.user')]));
+        flash(trans('core::messages.resource.resource created', ['name' => trans('user::users.title.user')]));
 
         return redirect()->route('backend::user.user.index');
     }
@@ -87,7 +87,7 @@ class UserController extends AdminBaseController
     public function edit($id)
     {
         if (! $user = $this->user->find($id)) {
-            flash(trans('core::messages.resource.resource not found',['name' => trans('user::users.title.user')]));
+            flash(trans('core::messages.resource.resource not found', ['name' => trans('user::users.title.user')]));
 
             return redirect()->route('backend::user.index');
         }
@@ -107,7 +107,7 @@ class UserController extends AdminBaseController
     {
         $this->user->updatewithRoles($request->all(), $request->roles, $id);
 
-        flash(trans('core::messages.resource.resource updated',['name' => trans('user::users.title.user')]));
+        flash(trans('core::messages.resource.resource updated', ['name' => trans('user::users.title.user')]));
 
         return redirect()->route('backend::user.user.index');
     }
@@ -122,7 +122,7 @@ class UserController extends AdminBaseController
     public function passwordResetRequest($id)
     {
         if (! $user = $this->user->find($id)) {
-            flash(trans('core::messages.resource.resource not found',['name' => trans('user::users.title.user')]));
+            flash(trans('core::messages.resource.resource not found', ['name' => trans('user::users.title.user')]));
 
             return redirect()->route('backend::user.index');
         }
@@ -147,7 +147,7 @@ class UserController extends AdminBaseController
     {
         $this->user->delete($id);
 
-        flash(trans('core::messages.resource.resource deleted',['name' => trans('user::users.title.user')]));
+        flash(trans('core::messages.resource.resource deleted', ['name' => trans('user::users.title.user')]));
 
         return redirect()->route('backend::user.user.index');
     }
