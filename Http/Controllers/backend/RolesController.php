@@ -56,7 +56,7 @@ class RolesController extends AdminBaseController
     public function store(RolesRequest $request)
     {
         if ($this->role->createWithUsers($request->all(), $request->users)) {
-            flash(trans('user::messages.role created'));
+            flash(trans('core::messages.resource.resource created',['name' => trans('user::roles.title.role')]));
         }
 
         return redirect()->route('backend::user.role.index');
@@ -72,7 +72,7 @@ class RolesController extends AdminBaseController
     public function edit($id)
     {
         if (! $role = $this->role->find($id)) {
-            flash()->error(trans('user::messages.role not found'));
+            flash(trans('core::messages.resource.resource not found',['name' => trans('user::roles.title.role')]));
 
             return redirect()->route('backend::user.role.index');
         }
@@ -95,7 +95,7 @@ class RolesController extends AdminBaseController
         $this->role->updateWithUsers($request->all(), $request->users, $id);
         $this->role->attachPermissions($permissions, $id);
 
-        flash(trans('user::messages.role updated'));
+        flash(trans('core::messages.resource.resource updated',['name' => trans('user::roles.title.role')]));
 
         return redirect()->route('backend::user.role.index');
     }
@@ -111,7 +111,7 @@ class RolesController extends AdminBaseController
     {
         $this->role->delete($id);
 
-        flash(trans('user::messages.role deleted'));
+        flash(trans('core::messages.resource.resource deleted',['name' => trans('user::roles.title.role')]));
 
         return redirect()->route('backend::user.role.index');
     }

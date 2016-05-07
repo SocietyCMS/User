@@ -11,16 +11,16 @@
 
     <a class="ui primary button" href="{{route('backend::user.user.create')}}">
         <i class="add user icon"></i>
-        {{ trans('user::users.button.new-user') }}
+        {{trans('core::elements.action.create resource', ['name'=>trans('user::users.title.user')])}}
     </a>
 
     <table class="ui selectable compact celled table">
         <thead>
-            <tr><th>{{ trans('user::users.table.user') }}</th>
-                <th>{{ trans('user::users.table.email') }}</th>
+            <tr><th>{{ trans('user::users.tabs.user') }}</th>
+                <th>{{ trans('user::users.form.email') }}</th>
                 <th>{{ trans('user::users.table.last_login') }}</th>
                 <th class="collapsing">{{ trans('user::users.table.activated') }}</th>
-                <th class="collapsing">{{ trans('user::users.table.actions') }}</th>
+                <th class="collapsing">{{ trans('core::elements.table.actions') }}</th>
             </tr>
         </thead>
         <tbody>

@@ -11,16 +11,16 @@
 
     <a class="ui primary button" href="{{route('backend::user.role.create')}}">
         <i class="users icon"></i>
-        {{ trans('user::roles.button.new role') }}
+        {{trans('core::elements.action.create resource', ['name'=>trans('user::roles.title.role')])}}
     </a>
 
     <table class="ui selectable compact celled table">
         <thead>
         <tr>
             <th>{{ trans('user::roles.table.name') }}</th>
-            <th>{{ trans('user::roles.table.created-at') }}</th>
-            <th>{{ trans('user::roles.table.updated-at') }}</th>
-            <th class="collapsing">{{ trans('user::roles.table.actions') }}</th>
+            <th>{{ trans('core::elements.table.created at') }}</th>
+            <th>{{ trans('core::elements.table.updated at') }}</th>
+            <th class="collapsing">{{ trans('core::elements.table.actions') }}</th>
         </tr>
         </thead>
         <tbody>

@@ -27,7 +27,7 @@
         @lang('core::elements.separator.or')
     </div>
     <div class="center aligned column">
-        <a href="{{ route('backend::user.user.passwordReset', $user->id) }}" class="ui big pink labeled icon button">
+        <a href="{{ route('backend::user.user.passwordReset', $user->id) }}" class="ui big blue labeled icon button">
             <i class="mail outline icon"></i>
             {{ trans('user::users.send reset password email') }}
         </a>

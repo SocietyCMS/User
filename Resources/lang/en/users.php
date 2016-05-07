@@ -1,14 +1,10 @@
 <?php
 
 return [
-    'button'                    => [
-        'new-user' => 'New User',
-    ],
     'title'                     => [
+        'user'            => 'User',
         'users'           => 'Users',
         'users and roles' => 'Users and Roles',
-        'new-user'        => 'New user',
-        'edit-user'       => 'Edit user',
     ],
     'tabs'                      => [
         'user'           => 'User',
@@ -28,15 +24,8 @@ return [
         'new password confirmation' => 'New password confirmation',
     ],
     'table'                     => [
-        'created-at' => 'Created At',
-        'updated-at' => 'Updated At',
         'last_login' => 'Last Login',
-        'first-name' => 'First name',
-        'last-name'  => 'Last name',
-        'email'      => 'Email',
-        'actions'    => 'Actions',
         'activated'  => 'Activated',
-        'user'       => 'User',
     ],
     'personTitle'               => [
         'male'   => 'Mr.',

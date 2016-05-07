@@ -4,7 +4,7 @@
     {{ trans('user::users.title.users') }}
 @endsection
 @section('subTitle')
-    {{ trans('user::users.title.edit-user') }}
+    {{trans('core::elements.action.edit resource', ['name'=>trans('user::users.title.user')])}}
 @endsection
 
 @section('content')

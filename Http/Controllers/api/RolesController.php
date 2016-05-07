@@ -56,7 +56,7 @@ class RolesController extends ApiBaseController
         $data = $this->mergeRequestWithPermissions($request);
 
         if ($this->role->create($data)) {
-            flash(trans('user::messages.role created'));
+            flash(trans('core::messages.resource.resource created',['name' => trans('user::roles.title.role')]));
         }
 
         return redirect()->route('backend::user.role.index');
@@ -72,7 +72,7 @@ class RolesController extends ApiBaseController
     public function edit($id)
     {
         if (! $role = $this->role->find($id)) {
-            flash()->error(trans('user::messages.role not found'));
+            flash(trans('core::messages.resource.resource not found',['name' => trans('user::roles.title.role')]));
 
             return redirect()->route('backend::user.role.index');
         }
@@ -94,7 +94,7 @@ class RolesController extends ApiBaseController
 
         $this->role->updateAndSyncUsers($id, $data, $request->users);
 
-        flash(trans('user::messages.role updated'));
+        flash(trans('core::messages.resource.resource updated',['name' => trans('user::roles.title.role')]));
 
         return redirect()->route('backend::user.role.index');
     }
@@ -110,7 +110,7 @@ class RolesController extends ApiBaseController
     {
         $this->role->delete($id);
 
-        flash(trans('user::messages.role deleted'));
+        flash(trans('core::messages.resource.resource deleted',['name' => trans('user::roles.title.role')]));
 
         return redirect()->route('backend::user.role.index');
     }

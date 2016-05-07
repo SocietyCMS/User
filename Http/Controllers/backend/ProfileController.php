@@ -80,7 +80,7 @@ class ProfileController extends AdminBaseController
 
         $this->user->update($input, $this->auth->id());
 
-        flash(trans('user::messages.profile updated'));
+        flash(trans('core::messages.resource.resource updated',['name' => trans('user::profile.title.profile')]));
 
         return redirect()->back();
     }
@@ -98,7 +98,7 @@ class ProfileController extends AdminBaseController
     {
         $this->user->update($request->all(), $this->auth->id());
 
-        flash(trans('user::messages.profile updated'));
+        flash(trans('core::messages.resource.resource updated',['name' => trans('user::profile.title.profile')]));
 
         return redirect()->back();
     }
