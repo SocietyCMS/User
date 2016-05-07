@@ -23,7 +23,7 @@
                                 @lang('user::profile.profile.upload new profile picture')
                             </a>
                             <div class="ui basic loading button" id="uploadInProgress">Loading</div>
-                            <p> @lang('core::messages.info.upload picture by drag and drop')</p>
+                            <p> @lang('user::profile.message.upload profile picture by drag-drop')</p>
 
                         </div>
 

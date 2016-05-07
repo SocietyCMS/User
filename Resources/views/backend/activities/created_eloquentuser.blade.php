@@ -1,6 +1,6 @@
 <div class="event {{$activity->privacy}}">
     <div class="label">
-        <i class="user icon"></i>
+        <img class="ui tiny circular right spaced image" src="{{ $activity->subject->present()->avatar }}" id="sidebarUserProfilePicture">
     </div>
     <div class="content">
         <div class="summary">

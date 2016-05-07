@@ -27,4 +27,7 @@ return [
         'new password'         => 'Neues Passwort',
         'confirm new password' => 'Neues Passwor bestätigen',
     ],
+    'message' => [
+        'upload profile picture by drag-drop' => 'Du kannst ein Bild hier hin ziehen und loslassen, um es hochzuladen.'
+    ]
 ];
