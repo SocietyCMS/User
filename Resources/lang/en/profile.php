@@ -28,6 +28,6 @@ return [
         'confirm new password' => 'Confirm new password',
     ],
     'message' => [
-        'upload profile picture by drag-drop' => 'You can drag&drop photos here to upload.'
-    ]
+        'upload profile picture by drag-drop' => 'You can drag&drop photos here to upload.',
+    ],
 ];
