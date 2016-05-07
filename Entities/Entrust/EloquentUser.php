@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
+use Modules\Core\Traits\Activity\RecordsActivity;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -18,6 +19,8 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use Authenticatable;
     use CanResetPassword;
     use PresentableTrait;
+    use RecordsActivity;
+
 
     use HasMediaTrait{ delete as mediaDelete; }
 
@@ -73,6 +76,30 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         return $this->hasMany('Modules\Core\Entities\Eloquent\Activity');
     }
 
+    /**
+     * @var array
+     */
+    protected static $recordEvents = ['created'];
+    
+    /**
+     * Views for the Dashboard timeline.
+     *
+     * @var string
+     */
+    protected static $templatePath = 'user::backend.activities';
+
+    /**
+     * Views for the Dashboard timeline.
+     *
+     * @var string
+     */
+    protected static $activityPrivacy = 'protected';
+
+    /**
+     * TODO: Add option to disable users.
+     *
+     * @return bool
+     */
     public function isActivated()
     {
         return true;

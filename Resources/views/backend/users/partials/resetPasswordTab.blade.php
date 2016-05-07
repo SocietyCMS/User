@@ -5,7 +5,7 @@
 
         <h3 class="ui dividing header">{{ trans('user::users.new password setup') }}</h3>
 
-        <div class="required field  @if($errors->has('password')) 'error' @endif">
+        <div class="field  @if($errors->has('password')) 'error' @endif">
             <label for="password">{{trans('user::users.form.new password')}}</label>
             <div class="ui left icon input">
                 <input type="password" name="password" id="password">
@@ -13,7 +13,7 @@
             </div>
             {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
         </div>
-        <div class="required field @if( $errors->has('password_confirmation')) 'error' @endif">
+        <div class="field @if( $errors->has('password_confirmation')) 'error' @endif">
             <label for="password_confirmation">{{trans('user::users.form.new password confirmation')}}</label>
             <div class="ui left icon input">
                 <input type="password" name="password_confirmation" id="password_confirmation">
