@@ -1,7 +1,9 @@
 <?php
 
+
 namespace Modules\User\Database\Seeders;
 
+use Faker\Factory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
@@ -110,6 +112,14 @@ class DemoTableSeeder extends Seeder
 
     private function createUsers()
     {
-        $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create();
+        $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create()
+            ->each(function($user) {
+                $faker = Factory::create();
+                $activity = $user->activities->first();
+                $activity->update([
+                    'created_at' => $start = $faker->dateTimeThisYear,
+                    'updated_at' => $faker->dateTimeBetween($start),
+                ]);
+            });
     }
 }
