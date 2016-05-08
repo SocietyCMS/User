@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Modules\User\Database\Seeders;
 
 use Faker\Factory;
@@ -113,7 +112,7 @@ class DemoTableSeeder extends Seeder
     private function createUsers()
     {
         $this->factory(\Modules\User\Entities\Entrust\EloquentUser::class, 50)->create()
-            ->each(function($user) {
+            ->each(function ($user) {
                 $faker = Factory::create();
                 $activity = $user->activities->first();
                 $activity->update([
