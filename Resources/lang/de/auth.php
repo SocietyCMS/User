@@ -5,7 +5,7 @@ return [
     'email'                                => 'E-Mail',
     'first-name'                           => 'Vorname',
     'last-name'                            => 'Nachname',
-    'remember me'                          => 'Anmeldung merken',
+    'remember me'                          => 'Eingeloggt bleiben',
     'forgot password'                      => 'Ich habe mein Passwort vergessen',
     'register'                             => 'Neue Mitgliedschaft registrieren',
     'password'                             => 'Passwort',
