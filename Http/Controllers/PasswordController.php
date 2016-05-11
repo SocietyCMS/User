@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\User\Http\Controllers;
 
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -22,8 +23,8 @@ class PasswordController extends PublicBaseController
     */
     use ResetsPasswords;
 
-
     protected $redirectPath;
+
     /**
      * Create a new password controller instance.
      *

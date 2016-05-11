@@ -17,7 +17,7 @@ $router->group(['prefix' => 'auth'], function (Router $router) {
 
     // Password reset link request routes...
     $router->get('password/email', ['as' => 'reset', 'uses' => 'PasswordController@getEmail']);
-    $router->post('password/email',  ['as' => 'reset.post', 'uses' => 'PasswordController@postEmail']);
+    $router->post('password/email', ['as' => 'reset.post', 'uses' => 'PasswordController@postEmail']);
     // Password reset routes...
     $router->get('password/reset/{token}', ['as' => 'reset.complete', 'uses' => 'PasswordController@getReset']);
     $router->post('password/reset', ['as' => 'reset.complete.post', 'uses' => 'PasswordController@postReset']);
