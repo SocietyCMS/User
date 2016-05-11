@@ -14,11 +14,13 @@ $router->group(['prefix' => 'auth'], function (Router $router) {
 
     // Account Activation
     $router->get('activate/{userId}/{activationCode}', 'AuthController@getActivate');
-    // Reset password
-    $router->get('reset', ['as' => 'reset', 'uses' => 'AuthController@getReset']);
-    $router->post('reset', ['as' => 'reset.post', 'uses' => 'AuthController@postReset']);
-    $router->get('reset/{id}/{code}', ['as' => 'reset.complete', 'uses' => 'AuthController@getResetComplete']);
-    $router->post('reset/{id}/{code}', ['as' => 'reset.complete.post', 'uses' => 'AuthController@postResetComplete']);
+
+    // Password reset link request routes...
+    $router->get('password/email', ['as' => 'reset', 'uses' => 'PasswordController@getEmail']);
+    $router->post('password/email',  ['as' => 'reset.post', 'uses' => 'PasswordController@postEmail']);
+    // Password reset routes...
+    $router->get('password/reset/{token}', ['as' => 'reset.complete', 'uses' => 'PasswordController@getReset']);
+    $router->post('password/reset', ['as' => 'reset.complete.post', 'uses' => 'PasswordController@postReset']);
 
     // Logout
     $router->get('logout', ['as' => 'logout', 'uses' => 'AuthController@getLogout']);

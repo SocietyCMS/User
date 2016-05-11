@@ -14,8 +14,9 @@ class ResetCompleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'password'              => 'required|min:3|confirmed',
-            'password_confirmation' => 'required',
+            'token'    => 'required',
+            'email'    => 'required|email',
+            'password' => 'required|confirmed|min:6',
         ];
     }
 

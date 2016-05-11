@@ -20,9 +20,6 @@ class EventServiceProvider extends ServiceProvider
         UserHasRegistered::class        => [
             SendRegistrationConfirmationEmail::class,
         ],
-        UserHasBegunResetProcess::class => [
-            SendResetCodeEmail::class,
-        ],
         UserWasUpdated::class           => [
             FlushesSidebarCache::class,
         ],

@@ -6,11 +6,10 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\PublicBaseController;
+use Modules\User\Entities\Entrust\EloquentUser;
 use Modules\User\Events\UserHasBegunResetProcess;
 use Modules\User\Exceptions\UserNotFoundException;
 use Modules\User\Http\Requests\RegisterRequest;
@@ -79,6 +78,8 @@ class AuthController extends PublicBaseController
     }
 
     /**
+     * Handle a registration request for the application.
+     *
      * @param RegisterRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -88,13 +89,12 @@ class AuthController extends PublicBaseController
         if (! \Setting::get('user::enable-registration')) {
             return redirect()->route('login');
         }
+        
+        \Auth::login($this->create($request->all()));
 
-        app('Modules\User\Services\UserRegistration')->register($request->all());
-
-        Flash::success(trans('user::messages.account created check email for activation'));
-
-        return redirect()->route('login');
+        return redirect($this->redirectPath());
     }
+
 
     /**
      * @return \Illuminate\Http\RedirectResponse
@@ -125,74 +125,18 @@ class AuthController extends PublicBaseController
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getReset()
-    {
-        return view('user::public.reset.begin');
-    }
-
-    /**
-     * @param ResetRequest $request
+     * Create a new user instance after a valid registration.
      *
-     * @throws UserNotFoundException
-     *
-     * @return $this|\Illuminate\Http\RedirectResponse
+     * @param  array  $data
+     * @return User
      */
-    public function postReset(ResetRequest $request)
+    protected function create(array $data)
     {
-        $user = $this->user->findByCredentials(['email' => $request->email]);
-
-        if (! $user) {
-            Flash::error(trans('user::messages.no user found'));
-
-            return redirect()->back()->withInput();
-        }
-
-        $code = $this->auth->createReminderCode($user);
-
-        event(new UserHasBegunResetProcess($user, $code));
-
-        Flash::success(trans('user::messages.check email to reset password'));
-
-        return redirect()->route('reset');
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getResetComplete()
-    {
-        return view('user::public.reset.complete');
-    }
-
-    /**
-     * @param                      $userId
-     * @param                      $code
-     * @param ResetCompleteRequest $request
-     *
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function postResetComplete($userId, $code, ResetCompleteRequest $request)
-    {
-        $this->input = $request->all();
-
-        $user = $this->user->find($userId);
-
-        if (! $user) {
-            Flash::error(trans('user::messages.user no longer exists'));
-
-            return redirect()->back()->withInput();
-        }
-
-        if (! $this->auth->completeResetPassword($user, $code, $request->password)) {
-            Flash::error(trans('user::messages.invalid reset code'));
-
-            return redirect()->back()->withInput();
-        }
-
-        Flash::success(trans('user::messages.password reset'));
-
-        return redirect()->route('login');
+        return EloquentUser::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
 }

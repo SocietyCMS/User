@@ -29,7 +29,7 @@ class EntrustAuthentication implements Authentication
      */
     public function register(array $user)
     {
-        Auth::login($this->create($user));
+        // TODO: Implement register() method.
     }
 
     /**

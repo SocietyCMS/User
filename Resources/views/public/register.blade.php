@@ -1,15 +1,13 @@
 @extends('layouts.master')
 @section('title')
-    {{ trans('user::auth.register') }} | @parent
+    {{ trans('user::auth.register') }}
 @stop
 
 @section('content')
-    <div class=" col-md-offset-3 col-md-6">
-        <h1>{{ trans('user::auth.register') }}</h1>
-        @include('flash::message')
-        <div class="well bs-component">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            @include('flash::message')
             {!! Form::open(array('route' => 'register.post')) !!}
-            <div class="body">
                 <div class="form-group{{ $errors->has('first_name') ? ' has-error has-feedback' : '' }}">
                     {!! Form::label('first_name', trans('user::auth.first-name')) !!}
                     {!! Form::text('first_name', Input::old('first_name'), ['class' => 'form-control', 'placeholder' => trans('user::auth.first-name')]) !!}
@@ -36,11 +34,13 @@
                     {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('user::auth.password confirmation')]) !!}
                     {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
                 </div>
-            </div>
-            <div class="footer">
-                <button type="submit" class="btn btn-primary btn-block">{{ trans('user::auth.register me')}}</button>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">{{ trans('user::auth.register me')}}</button>
+                </div>
+
                 <a href="{{ URL::route('login') }}" class="text-center">{{ trans('user::auth.I already have a membership') }}</a>
-            </div>
+
             {!! Form::close() !!}
         </div>
     </div>
