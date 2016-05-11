@@ -10,11 +10,7 @@ use Laracasts\Flash\Flash;
 use Modules\Core\Contracts\Authentication;
 use Modules\Core\Http\Controllers\PublicBaseController;
 use Modules\User\Entities\Entrust\EloquentUser;
-use Modules\User\Events\UserHasBegunResetProcess;
-use Modules\User\Exceptions\UserNotFoundException;
 use Modules\User\Http\Requests\RegisterRequest;
-use Modules\User\Http\Requests\ResetCompleteRequest;
-use Modules\User\Http\Requests\ResetRequest;
 use Modules\User\Repositories\UserRepository;
 
 /**
@@ -89,12 +85,11 @@ class AuthController extends PublicBaseController
         if (! \Setting::get('user::enable-registration')) {
             return redirect()->route('login');
         }
-        
+
         \Auth::login($this->create($request->all()));
 
         return redirect($this->redirectPath());
     }
-
 
     /**
      * @return \Illuminate\Http\RedirectResponse
