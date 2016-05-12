@@ -21,7 +21,7 @@ interface UserInterface
      * @return bool
      */
     public function hasRoleName($name);
-    
+
     /**
      * Implement presenter.
      *
