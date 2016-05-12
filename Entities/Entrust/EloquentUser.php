@@ -94,16 +94,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     protected static $activityPrivacy = 'protected';
 
-    /**
-     * TODO: Add option to disable users.
-     *
-     * @return bool
-     */
-    public function isActivated()
-    {
-        return true;
-    }
-
     public function registerMediaConversions()
     {
         $this->addMediaConversion('square')

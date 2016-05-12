@@ -19,7 +19,6 @@
             <tr><th>{{ trans('user::users.tabs.user') }}</th>
                 <th>{{ trans('user::users.form.email') }}</th>
                 <th>{{ trans('user::users.table.last_login') }}</th>
-                <th class="collapsing">{{ trans('user::users.table.activated') }}</th>
                 <th class="collapsing">{{ trans('core::elements.table.actions') }}</th>
             </tr>
         </thead>
@@ -53,11 +52,6 @@
                 </td>
                 <td>
                     {{ $user->present()->lastLogin }}
-                </td>
-                <td class="center aligned">
-                    @if($user->isActivated())
-                        <i class="large green checkmark icon"></i>
-                    @endif
                 </td>
                 <td>
                     <div class="ui icon top right pointing dropdown button">
