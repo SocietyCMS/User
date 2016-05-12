@@ -3,7 +3,6 @@
 namespace Modules\User\Repositories\Entrust;
 
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
-use Modules\User\Repositories\Entrust\Criteria\SoftDeleteCriteria;
 use Modules\User\Repositories\UserRepository;
 
 class EntrustUserRepository extends EloquentBaseRepository implements UserRepository
@@ -17,7 +16,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     {
         return 'Modules\User\Entities\Entrust\EloquentUser';
     }
-    
+
     /**
      * Encrypt password before creating a new user instance.
      *
