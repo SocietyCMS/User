@@ -10,6 +10,7 @@ class SoftDeleteCriteria implements CriteriaInterface
     public function apply($model, RepositoryInterface $repository)
     {
         $model = $model->whereNull($model->getQualifiedDeletedAtColumn());
+
         return $model;
     }
 }
