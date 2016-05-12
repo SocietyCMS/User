@@ -21,7 +21,8 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     /**
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
-    public function boot(){
+    public function boot()
+    {
         $this->pushCriteria(SoftDeleteCriteria::class);
     }
 

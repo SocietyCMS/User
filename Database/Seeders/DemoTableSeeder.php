@@ -115,7 +115,7 @@ class DemoTableSeeder extends Seeder
             ->each(function ($user) {
                 $faker = Factory::create();
                 $activity = $user->activities->first();
-                if($activity) {
+                if ($activity) {
                     $activity->update([
                         'created_at' => $start = $faker->dateTimeThisYear,
                         'updated_at' => $faker->dateTimeBetween($start),
