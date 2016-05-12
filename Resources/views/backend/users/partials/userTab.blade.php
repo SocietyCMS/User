@@ -30,13 +30,3 @@
 
     {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
 </div>
-
-<div class="ui segment">
-    <div class="field @if($errors->has('activated')) error @endif @if(isset($user) && $user->id == $currentUser->id) disabled @endif">
-        <div class="ui toggle checkbox">
-            <input type="checkbox" @if(isset($user) && $user->isActivated())checked="checked"@endif name="activated">
-            <label for="activated">@lang('user::users.form.active')</label>
-        </div>
-        {!! $errors->first('activated', '<span class="help-block">:message</span>') !!}
-    </div>
-</div>

@@ -21,14 +21,7 @@ interface UserInterface
      * @return bool
      */
     public function hasRoleName($name);
-
-    /**
-     * Check if the current user is activated.
-     *
-     * @return bool
-     */
-    public function isActivated();
-
+    
     /**
      * Implement presenter.
      *

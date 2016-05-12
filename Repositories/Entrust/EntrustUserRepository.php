@@ -17,15 +17,7 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     {
         return 'Modules\User\Entities\Entrust\EloquentUser';
     }
-
-    /**
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
-     */
-    public function boot()
-    {
-        $this->pushCriteria(SoftDeleteCriteria::class);
-    }
-
+    
     /**
      * Encrypt password before creating a new user instance.
      *
