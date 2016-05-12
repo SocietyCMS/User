@@ -3,6 +3,7 @@
 namespace Modules\User\Repositories\Entrust;
 
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
+use Modules\User\Repositories\Entrust\Criteria\SoftDeleteCriteria;
 use Modules\User\Repositories\UserRepository;
 
 class EntrustUserRepository extends EloquentBaseRepository implements UserRepository
@@ -15,6 +16,13 @@ class EntrustUserRepository extends EloquentBaseRepository implements UserReposi
     public function model()
     {
         return 'Modules\User\Entities\Entrust\EloquentUser';
+    }
+
+    /**
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function boot(){
+        $this->pushCriteria(SoftDeleteCriteria::class);
     }
 
     /**

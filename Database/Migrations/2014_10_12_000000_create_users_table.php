@@ -34,10 +34,10 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
 
-            $table->string('password', 60);
-
+            $table->string('password');
             $table->timestamp('last_login');
 
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

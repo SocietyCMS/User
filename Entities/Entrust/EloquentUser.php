@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Core\Traits\Activity\RecordsActivity;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
@@ -20,10 +21,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use CanResetPassword;
     use PresentableTrait;
     use RecordsActivity;
+    use SoftDeletes;
 
-    use HasMediaTrait{ delete as mediaDelete; }
+    use HasMediaTrait;
 
-    use EntrustUserTrait { can as entrustCan; delete as entrustDelete; }
+    use EntrustUserTrait {
+        can as entrustCan;
+    }
 
     /**
      * The database table used by the model.
@@ -57,6 +61,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Presenter Class.
@@ -118,7 +129,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      * return rearly if the user is in the admin group.
      *
      * @param string|array $permission Permission string or array of permissions.
-     * @param bool         $requireAll All permissions in the array are required.
+     * @param bool $requireAll All permissions in the array are required.
      *
      * @return bool
      */
@@ -129,19 +140,5 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         }
 
         return $this->entrustCan($permission, $requireAll = false);
-    }
-
-    /**
-     * Delete the model. The extra logic isn't handled in a model event since the boot function is unreliable
-     * for currently unknown reasons.
-     *
-     * @return bool
-     */
-    public function delete()
-    {
-        $this->mediaDelete();
-        $this->entrustDelete();
-
-        return true;
     }
 }
