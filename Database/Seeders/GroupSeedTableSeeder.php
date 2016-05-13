@@ -21,7 +21,6 @@ class GroupSeedTableSeeder extends Seeder
         DB::table('user__users')->delete();
         DB::table('user__roles')->delete();
         DB::table('user__password_resets')->delete();
-        DB::table('user__activities')->delete();
         DB::table('user__role_user')->delete();
         DB::table('user__permissions')->delete();
         DB::table('user__permission_role')->delete();
