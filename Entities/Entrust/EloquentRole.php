@@ -5,7 +5,6 @@ namespace Modules\User\Entities\Entrust;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
 use Zizaco\Entrust\Contracts\EntrustRoleInterface;
-use Zizaco\Entrust\Traits\EntrustRoleTrait;
 
 class EloquentRole extends Model implements EntrustRoleInterface
 {
