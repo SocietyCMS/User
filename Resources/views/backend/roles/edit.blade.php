@@ -47,7 +47,7 @@
                 .dropdown();
 
         @if($role->name == 'admin')
-            $('.ui.fitted.slider.checkbox').checkbox( 'set disabled' );
+            $('.ui.fitted.toggle.checkbox').checkbox( 'set disabled' );
         @endif
 
 
