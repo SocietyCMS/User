@@ -28,7 +28,7 @@
                 {{ trans('core::elements.button.cancel') }}
             </a>
             <button class="ui primary right floated button" type="submit">
-                {{ trans('core::elements.button.update') }}
+                {{ trans('core::elements.button.create') }}
             </button>
         </div>
 
