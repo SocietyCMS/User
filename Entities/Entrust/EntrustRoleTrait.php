@@ -1,6 +1,8 @@
-<?php namespace Modules\User\Entities\Entrust;
+<?php
 
-/**
+namespace Modules\User\Entities\Entrust;
+
+/*
  * This file is part of Entrust,
  * a role & permission management solution for Laravel.
  *
@@ -18,32 +20,39 @@ trait EntrustRoleTrait
     {
         $rolePrimaryKey = $this->primaryKey;
         $cacheKey = 'entrust_permissions_for_role_'.$this->$rolePrimaryKey;
+
         return Cache::tags(Config::get('entrust.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
             return $this->perms()->get();
         });
     }
+
     public function save(array $options = [])
     {   //both inserts and updates
-        if(!parent::save($options)){
+        if (! parent::save($options)) {
             return false;
         }
         Cache::tags(Config::get('entrust.permission_role_table'))->flush();
+
         return true;
     }
+
     public function delete(array $options = [])
     {   //soft or hard
-        if(!parent::delete($options)){
+        if (! parent::delete($options)) {
             return false;
         }
         Cache::tags(Config::get('entrust.permission_role_table'))->flush();
+
         return true;
     }
+
     public function restore()
     {   //soft delete undo's
-        if(!parent::restore()){
+        if (! parent::restore()) {
             return false;
         }
         Cache::tags(Config::get('entrust.permission_role_table'))->flush();
+
         return true;
     }
 
@@ -54,7 +63,7 @@ trait EntrustRoleTrait
      */
     public function users()
     {
-        return $this->belongsToMany(Config::get('auth.providers.users.model'), Config::get('entrust.role_user_table'),Config::get('entrust.role_foreign_key'),Config::get('entrust.user_foreign_key'));
+        return $this->belongsToMany(Config::get('auth.providers.users.model'), Config::get('entrust.role_user_table'), Config::get('entrust.role_foreign_key'), Config::get('entrust.user_foreign_key'));
         // return $this->belongsToMany(Config::get('auth.model'), Config::get('entrust.role_user_table'));
     }
 
@@ -78,8 +87,8 @@ trait EntrustRoleTrait
      */
     public static function bootEntrustRoleTrait()
     {
-        static::deleting(function($role) {
-            if (!method_exists(Config::get('entrust.role'), 'bootSoftDeletes')) {
+        static::deleting(function ($role) {
+            if (! method_exists(Config::get('entrust.role'), 'bootSoftDeletes')) {
                 $role->users()->sync([]);
                 $role->perms()->sync([]);
             }
@@ -102,9 +111,9 @@ trait EntrustRoleTrait
             foreach ($name as $permissionName) {
                 $hasPermission = $this->hasPermission($permissionName);
 
-                if ($hasPermission && !$requireAll) {
+                if ($hasPermission && ! $requireAll) {
                     return true;
-                } elseif (!$hasPermission && $requireAll) {
+                } elseif (! $hasPermission && $requireAll) {
                     return false;
                 }
             }
@@ -133,7 +142,7 @@ trait EntrustRoleTrait
      */
     public function savePermissions($inputPermissions)
     {
-        if (!empty($inputPermissions)) {
+        if (! empty($inputPermissions)) {
             $this->perms()->sync($inputPermissions);
         } else {
             $this->perms()->detach();
@@ -169,11 +178,13 @@ trait EntrustRoleTrait
      */
     public function detachPermission($permission)
     {
-        if (is_object($permission))
+        if (is_object($permission)) {
             $permission = $permission->getKey();
+        }
 
-        if (is_array($permission))
+        if (is_array($permission)) {
             $permission = $permission['id'];
+        }
 
         $this->perms()->detach($permission);
     }
@@ -193,7 +204,7 @@ trait EntrustRoleTrait
     }
 
     /**
-     * Detach multiple permissions from current role
+     * Detach multiple permissions from current role.
      *
      * @param mixed $permissions
      *
