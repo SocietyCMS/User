@@ -51,7 +51,6 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                     $this->auth->can('user::manage-role')
                 );
             });
-
         });
 
         return $menu;
