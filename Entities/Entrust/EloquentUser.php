@@ -98,7 +98,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     protected static $templatePath = 'user::backend.activities';
 
     /**
-     * Views for the Dashboard timeline.
+     * Privacy setting for the dashboard. Only show users to logged in users.
      *
      * @var string
      */
