@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-offset-2 col-md-8 col-xs-12">
             @include('flash::message')
             {!! Form::open(array('route' => 'register.post')) !!}
                 <div class="form-group{{ $errors->has('first_name') ? ' has-error has-feedback' : '' }}">
